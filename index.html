@@ -32,9 +32,9 @@
       <div class="nav-link">
         <button
           class="login-btn"
-          onclick="document.getElementById('id01').style.display='block'"
-        >
-          Sign in<img src="./images/login-btn.png" height="20px" width="20px" />
+          onclick="document.getElementById('id01').style.display='block'">
+          Sign in
+          <img src="./images/login-btn.png" height="20px" width="20px"/>
         </button>
       </div>
     </nav>
@@ -54,19 +54,19 @@
       <div class="row">
         <form>
           <div class="column">
-            <label for="weather">GDP of Year (in trillions USD):</label>
-            <input type="field" id="gdp-year" name="gdp-year" value="1.53" /><br /><br />
-            <label for="weather">Inflation Rate:</label>
-            <input type="field" id="inflation-rate" name="inflation-rate" value="1.43" /><br /><br />
+            <label for="weather">GDP of Year (in trillions USD):</label><br>
+            <input type="field" id="gdp-year" name="gdp-year" value="1.53" /><br><br>
+            <label for="weather">Inflation Rate:</label><br>
+            <input type="field" id="inflation-rate" name="inflation-rate" value="1.43" /><br><br>
             
-            <label for="pandemic">Pandemic:</label><br />
+            <label for="pandemic">Pandemic:</label><br>
             <!-- put check box y/n -->
-            <input type="radio" id="pandemic-yes" name="yes" value="Yes">
+            <input type="radio" id="pandemic-yes" name="pandemic-ans" value="Yes">
             <label for="pandemic-yes">Yes</label><br>
-            <input type="radio" id="pandemic-no" name="no" value="No">
+            <input type="radio" id="pandemic-no" name="pandemic-ans" value="No">
             <label for="pandemic-no">No</label><br><br>
 
-            <label for="month">Month<span>*</span>:</label>
+            <label for="month">Month<span>*</span>:</label><br>
             <!-- dropdown option -->
             <select id="month" name="month">
               <option value="jan">January</option>
@@ -82,9 +82,11 @@
               <option value="nov">November</option>
               <option value="dec">December</option>
             </select>
-            <br/><br />
+            <br/><br>
+          </div>
 
-            <label for="day-of-wk">Day of the Week:</label>
+          <div class="column">
+            <label for="day-of-wk">Day of the Week:</label><br>
             <!-- dropdown option -->
             <select id="day-of-wk" name="day-of-wk">
               <option value="mon">Monday</option>
@@ -95,9 +97,9 @@
               <option value="sat">Saturday</option>
               <option value="sun">Sunday</option>
             </select>
-            <br/><br />
+            <br/><br>
 
-            <label for="holiday">Holiday:</label>
+            <label for="holiday">Holiday:</label><br>
             <!-- dropdown option -->
             <select id="holiday" name="holiday">
               <option value="christmas">Christmas</option>
@@ -112,9 +114,9 @@
               <option value="super-bowl">Super Bowl</option>
               <option value="st-pat-day">St. Patrick's Day</option>
             </select>
-            <br/><br />
+            <br/><br>
 
-            <label for="time">Time of Day:</label>
+            <label for="time">Time of Day:</label><br>
             <!-- dropdown option -->
             <select id="time" name="time">
               <option value="early-morn">Early Morning</option>
@@ -124,20 +126,19 @@
               <option value="late-aft">Late Afternoon</option>
               <option value="late-eve">Late Evening</option>
               <option value="past-midngt">Past Midnight</option>
-            </select>
+            </select><br><br>
+            <label for="weather">Weather:</label><br>
+            <input type="field" id="weather" name="weather" value="Thunder storm" /><br><br>
           </div>
 
           <div class="column"> 
-            <label for="weather">Weather:</label>
-            <input type="field" id="weather" name="weather" value="Thunder storm" /><br /><br />
+            <label for="rooms-avail">Beds Available (Per 1000 People)<span>*</span>:</label><br>
+            <input type="field" id="beds-avail" name="beds-avail" value="2.6" /><br><br>
 
-            <label for="rooms-avail">Beds Available (Per 1000 People)<span>*</span>:</label>
-            <input type="field" id="beds-avail" name="beds-avail" value="2.6" /><br /><br />
+            <label for="rooms-avail">Population Density (Per Square Kilometer):</label><br>
+            <input type="field" id="pop-density" name="pop-density" value="2004.4" /><br><br>
 
-            <label for="rooms-avail">Population Density (Per Square Kilometer):</label><br />
-            <input type="field" id="pop-density" name="pop-density" value="2004.4" /><br /><br />
-
-            <label for="rooms-avail">Type of Injury<span>*</span>:</label><br />
+            <label for="rooms-avail">Type of Injury<span>*</span>:</label><br>
             <input type="checkbox" id="injury1" name="injury1" value="stroke">
             <label for="injury1"> Stroke</label><br>
             <input type="checkbox" id="injury2" name="injury2" value="heart-atk">
@@ -153,26 +154,25 @@
             <input type="checkbox" id="injury7" name="injury7" value="ab-pain">
             <label for="injury7"> Abdominal Pain</label><br><br>
 
-            <label for="injury-zone">Injury Severity Zone<span>*</span>:</label>
+            <label for="injury-zone">Injury Severity Zone<span>*</span>:</label><br>
             <!-- dropdown option -->
             <select id="injury-zone" name="injury-zone">
               <option value="green">Green</option>
               <option value="yellow">Yellow</option>
               <option value="red">Red</option>
             </select>
-            <br/><br/>
           </div>
-            <input type="submit" value="Generate">
-          </form>
+        </form>
       </div> 
+      <input type="submit" value="Generate">
     </div>
 
-    <!-- LOG IN BUTTON POP UP -->
-    <div id="id01" class="modal">
+    <!-- SIGN IN MODAL -->
+    <div id="id01" class="signin-modal">
       <form
         class="modal-content animate"
-        action="/action_page.php"
-        method="post"
+        action=""
+        method=""
       >
         <div class="imgcontainer">
           <span
@@ -184,7 +184,7 @@
           <img src="./images/logo-hospital.png" alt="Avatar" class="avatar" />
         </div>
 
-        <div class="container">
+        <div class="signin-container">
           <label for="uname"><b>Username</b></label>
           <input
             type="text"
@@ -208,7 +208,7 @@
           </label>
         </div>
 
-        <div class="container" style="background-color: #f1f1f1">
+        <div class="cancel-container" style="background-color: #f1f1f1">
           <button
             type="button"
             onclick="document.getElementById('id01').style.display='none'"
@@ -220,6 +220,7 @@
         </div>
       </form>
     </div>
+
     <script>
       // Get the modal
       var modal = document.getElementById("id01");

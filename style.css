@@ -1,5 +1,24 @@
-.banner-text {
+body {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+span {
+    color: red;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.banner-text {
     font-size: 20px;
     display: flex;
     align-content: center;
@@ -11,7 +30,6 @@
 }
 
 .home-txt {
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
 }
 
@@ -19,7 +37,6 @@
     background-color: transparent;
     color: white;
     border: none;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
     vertical-align: middle;
     display: flex;
@@ -31,7 +48,6 @@
 }
 
 .navbar {
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
     width: 100%;
     display: flex;
@@ -66,10 +82,11 @@
     display: block;
 }
 
-.model-form {
-    font-family: Arial, Helvetica, sans-serif;
+.model-form select {
+    width: 20%;
 }
 
+/* Sign-in Modal */
 input[type=field] {
     width: 20%;
     padding: 12px 20px;
@@ -100,7 +117,6 @@ input[type=password] {
 
 
 /* Center the image and position the close button */
-
 .imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;
@@ -123,7 +139,6 @@ span.psw {
 
 
 /* The Modal (background) */
-
 .modal {
     font-family: Arial, Helvetica, sans-serif;
     display: none;
@@ -147,9 +162,7 @@ span.psw {
     padding-top: 60px;
 }
 
-
-/* Modal Content/Box */
-
+/* Sign-in Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
     margin: 5% auto 15% auto;
@@ -159,9 +172,7 @@ span.psw {
     /* Could be more or less, depending on screen size */
 }
 
-
 /* The Close Button (x) */
-
 .close {
     position: absolute;
     right: 25px;
@@ -177,7 +188,37 @@ span.psw {
     cursor: pointer;
 }
 
+/* help page contact form */
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
 
+input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.help-container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 50%;
+}
 /* Add Zoom Animation */
 
 .animate {
@@ -205,7 +246,6 @@ span.psw {
 
 
 /* Change styles for span and cancel button on extra small screens */
-
 @media screen and (max-width: 300px) {
     span.psw {
         display: block;

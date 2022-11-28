@@ -51,14 +51,121 @@
       </p>
     </div>
     <div class="model-form">
+      <div class="row">
         <form>
-            <label for="weather">Weather:</label><br />
-            <input type="field" id="weather" name="weather" value="Thunder storm" /><br />
-            <label for="rooms-avail">Rooms Available:</label><br />
-            <input type="field" id="rooms-avail" name="rooms-avail" value="10" /><br /><br />
+          <div class="column">
+            <label for="weather">GDP of Year (in trillions USD):</label>
+            <input type="field" id="gdp-year" name="gdp-year" value="1.53" /><br /><br />
+            <label for="weather">Inflation Rate:</label>
+            <input type="field" id="inflation-rate" name="inflation-rate" value="1.43" /><br /><br />
+            
+            <label for="pandemic">Pandemic:</label><br />
+            <!-- put check box y/n -->
+            <input type="radio" id="pandemic-yes" name="yes" value="Yes">
+            <label for="pandemic-yes">Yes</label><br>
+            <input type="radio" id="pandemic-no" name="no" value="No">
+            <label for="pandemic-no">No</label><br><br>
+
+            <label for="month">Month<span>*</span>:</label>
+            <!-- dropdown option -->
+            <select id="month" name="month">
+              <option value="jan">January</option>
+              <option value="feb">February</option>
+              <option value="mar">March</option>
+              <option value="apr">April</option>
+              <option value="may">May</option>
+              <option value="jun">June</option>
+              <option value="jul">July</option>
+              <option value="aug">August</option>
+              <option value="sep">September</option>
+              <option value="oct">October</option>
+              <option value="nov">November</option>
+              <option value="dec">December</option>
+            </select>
+            <br/><br />
+
+            <label for="day-of-wk">Day of the Week:</label>
+            <!-- dropdown option -->
+            <select id="day-of-wk" name="day-of-wk">
+              <option value="mon">Monday</option>
+              <option value="tue">Tuesday</option>
+              <option value="wed">Wednesday</option>
+              <option value="thu">Thursday</option>
+              <option value="fri">Friday</option>
+              <option value="sat">Saturday</option>
+              <option value="sun">Sunday</option>
+            </select>
+            <br/><br />
+
+            <label for="holiday">Holiday:</label>
+            <!-- dropdown option -->
+            <select id="holiday" name="holiday">
+              <option value="christmas">Christmas</option>
+              <option value="new-years">New Year's Day</option>
+              <option value="blk-friday">Black Friday</option>
+              <option value="labor-day">Labour Day</option>
+              <option value="easter">Easter Sunday</option>
+              <option value="halloween">Halloween</option>
+              <option value="can-day">Canada Day</option>
+              <option value="thanksgiving">Thanksgiving</option>
+              <option value="val-day">Valentine's Day</option>
+              <option value="super-bowl">Super Bowl</option>
+              <option value="st-pat-day">St. Patrick's Day</option>
+            </select>
+            <br/><br />
+
+            <label for="time">Time of Day:</label>
+            <!-- dropdown option -->
+            <select id="time" name="time">
+              <option value="early-morn">Early Morning</option>
+              <option value="early-aft">Early Afternoon</option>
+              <option value="early-eve">Early Evening</option>
+              <option value="late-morn">Late Morning</option>
+              <option value="late-aft">Late Afternoon</option>
+              <option value="late-eve">Late Evening</option>
+              <option value="past-midngt">Past Midnight</option>
+            </select>
+          </div>
+
+          <div class="column"> 
+            <label for="weather">Weather:</label>
+            <input type="field" id="weather" name="weather" value="Thunder storm" /><br /><br />
+
+            <label for="rooms-avail">Beds Available (Per 1000 People)<span>*</span>:</label>
+            <input type="field" id="beds-avail" name="beds-avail" value="2.6" /><br /><br />
+
+            <label for="rooms-avail">Population Density (Per Square Kilometer):</label><br />
+            <input type="field" id="pop-density" name="pop-density" value="2004.4" /><br /><br />
+
+            <label for="rooms-avail">Type of Injury<span>*</span>:</label><br />
+            <input type="checkbox" id="injury1" name="injury1" value="stroke">
+            <label for="injury1"> Stroke</label><br>
+            <input type="checkbox" id="injury2" name="injury2" value="heart-atk">
+            <label for="injury2"> Heart Attack</label><br>
+            <input type="checkbox" id="injury3" name="injury3" value="minor-cut">
+            <label for="injury3"> Minor Cuts</label><br>
+            <input type="checkbox" id="injury4" name="injury4" value="major-cut">
+            <label for="injury4"> Major Cuts</label><br>
+            <input type="checkbox" id="injury5" name="injury5" value="flu">
+            <label for="injury5"> Flu</label><br>
+            <input type="checkbox" id="injury6" name="injury6" value="cardiac-arrest">
+            <label for="injury6"> Cardiac Arrest</label><br>
+            <input type="checkbox" id="injury7" name="injury7" value="ab-pain">
+            <label for="injury7"> Abdominal Pain</label><br><br>
+
+            <label for="injury-zone">Injury Severity Zone<span>*</span>:</label>
+            <!-- dropdown option -->
+            <select id="injury-zone" name="injury-zone">
+              <option value="green">Green</option>
+              <option value="yellow">Yellow</option>
+              <option value="red">Red</option>
+            </select>
+            <br/><br/>
+          </div>
+            <input type="submit" value="Generate">
           </form>
+      </div> 
     </div>
-    <button class="gen-btn">Generate</button>
 
     <!-- LOG IN BUTTON POP UP -->
     <div id="id01" class="modal">

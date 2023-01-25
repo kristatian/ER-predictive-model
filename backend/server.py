@@ -5,17 +5,13 @@ import functools
 import operator
 import json
 
-""" db = mysql.connect(
-    host = "localhost",
-    user = "root",
-    passwd = "rootmodel"
-) """
+
 #print(db)
 
 db = mysql.connect(
     host = "localhost",
-    user = "root",
-    passwd = "rootmodel",
+    user = "our_info_here",
+    passwd = "your_info_here",
     database = "erDB"
 )
 cursor = db.cursor()

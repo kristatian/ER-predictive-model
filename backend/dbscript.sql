@@ -26,6 +26,3 @@ CREATE TABLE what_if_scenario(
     PRIMARY KEY (scenario_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
-
-ALTER TABLE what_if_scenario
-ADD scenario_name VARCHAR(255) NOT NULL;

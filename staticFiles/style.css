@@ -78,7 +78,7 @@ span {
     text-decoration: underline;
 }
 
-.history-txt a{
+.history-txt a {
     display: block;
 }
 
@@ -86,7 +86,9 @@ span {
     width: 60%;
 }
 
+
 /* Sign-in Modal */
+
 input[type=field] {
     width: 60%;
     padding: 12px 20px;
@@ -96,7 +98,9 @@ input[type=field] {
     box-sizing: border-box;
 }
 
+
 /* Full-width input fields */
+
 input[type=text],
 input[type=password] {
     width: 100%;
@@ -107,14 +111,18 @@ input[type=password] {
     box-sizing: border-box;
 }
 
+
 /* Extra styles for the cancel button */
+
 .cancelbtn {
     width: auto;
     padding: 10px 18px;
     background-color: #f44336;
 }
 
+
 /* Center the image and position the close button */
+
 .imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;
@@ -126,8 +134,13 @@ img.avatar {
     border-radius: 50%;
 }
 
-.signin-container{
+.signin-container {
     padding: 16px;
+}
+
+.prediction-container {
+    padding: 16px;
+    text-align: center;
 }
 
 .cancel-container {
@@ -139,31 +152,82 @@ span.psw {
     padding-top: 16px;
 }
 
+
 /* Sign-in Modal (background) */
+
 .signin-modal {
     font-family: Arial, Helvetica, sans-serif;
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
     padding-top: 60px;
 }
 
-/* Sign-in Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+.prediction-modal {
+    font-family: Arial, Helvetica, sans-serif;
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
 }
 
+
+/* Sign-in Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 40%;
+    /* Could be more or less, depending on screen size */
+}
+
+
+/* Generate Prediction Content/Box */
+
+.modal-content-pred {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 30%;
+    /* Could be more or less, depending on screen size */
+}
+
+
 /* The Close Button (x) */
+
 .close {
     position: absolute;
     right: 25px;
@@ -179,8 +243,12 @@ span.psw {
     cursor: pointer;
 }
 
+
 /* help page contact form */
-input[type=text], select, textarea {
+
+input[type=text],
+select,
+textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -200,6 +268,15 @@ input[type=submit] {
     cursor: pointer;
 }
 
+button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 input[type=submit]:hover {
     background-color: #45a049;
 }
@@ -210,6 +287,8 @@ input[type=submit]:hover {
     padding: 20px;
     width: 50%;
 }
+
+
 /* Add Zoom Animation */
 
 .animate {
@@ -235,7 +314,9 @@ input[type=submit]:hover {
     }
 }
 
+
 /* Change styles for span and cancel button on extra small screens */
+
 @media screen and (max-width: 300px) {
     span.psw {
         display: block;

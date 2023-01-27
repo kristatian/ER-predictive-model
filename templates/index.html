@@ -11,14 +11,14 @@
     <div class="row">
         <form action="#" id="prediction-form" method="POST">
             <div class="column">
-                <label for="weather">GDP of Year (in trillions USD):</label><br />
+                <label for="gdp">GDP of Year (in trillions USD):</label><br />
                 <input type="field" id="gdp-year" name="gdp-year" value="1.53" /><br /><br />
-                <label for="weather">Inflation Rate:</label><br />
+                <label for="inflation">Inflation Rate:</label><br />
                 <input type="field" id="inflation-rate" name="inflation-rate" value="1.43" /><br /><br />
 
                 <label for="pandemic">Pandemic:</label><br />
                 <!-- put check box y/n -->
-                <input type="radio" id="pandemic-yes" name="pandemic-ans" value="Yes" checked=true/>
+                <input type="radio" id="pandemic-yes" name="pandemic-ans" value="Yes" checked/>
                 <label for="pandemic-yes">Yes</label><br />
                 <input type="radio" id="pandemic-no" name="pandemic-ans" value="No" />
                 <label for="pandemic-no">No</label><br /><br />
@@ -40,6 +40,9 @@
                     <option value="dec">December</option>
                 </select>
                 <br /><br />
+
+                <label for="age">Average Age of Province:</label><br />
+                <input type="field" id="average-age" name="average-age" value="34" /><br /><br />
             </div>
 
             <div class="column">
@@ -59,7 +62,9 @@
                 <label for="holiday">Holiday:</label><br />
                 <!-- dropdown option -->
                 <select id="holiday" name="holiday">
+                    <option value="none">None</option>
                     <option value="christmas">Christmas</option>
+                    <option value="new-years-eve">New Year's Eve</option>
                     <option value="new-years">New Year's Day</option>
                     <option value="blk-friday">Black Friday</option>
                     <option value="labor-day">Labour Day</option>
@@ -67,6 +72,7 @@
                     <option value="halloween">Halloween</option>
                     <option value="can-day">Canada Day</option>
                     <option value="thanksgiving">Thanksgiving</option>
+                    <option value="victoria-day">Victoria Day</option>
                     <option value="val-day">Valentine's Day</option>
                     <option value="super-bowl">Super Bowl</option>
                     <option value="st-pat-day">St. Patrick's Day</option>
@@ -86,8 +92,12 @@
                 </select>
                 <br /><br />
                 <label for="weather">Weather:</label><br />
-                <input type="field" id="weather" name="weather" value="Thunder storm"/>
+                <input type="field" id="weather" name="weather" value="Windy"/>
                 <br /><br />
+
+                <label for="facilities">Healthcare Facilities Within 50km Radius:</label><br />
+                <input type="field" id="num-facilities" name="num-facilities" value="3" /><br /><br />
+
             </div>
 
             <div class="column">
@@ -101,22 +111,47 @@
                 <br /><br />
 
                 <label for="injury-type">Type of Injury<span>*</span>:</label><br />
-                <input type="checkbox" id="injury1" name="injury1" value="stroke" />
-                <label for="injury1"> Stroke</label><br />
+
+                <input type="checkbox" id="injury1" name="injury1" value="seizure"/>
+                <label for="injury1"> Active Seizure</label><br />
+
                 <input type="checkbox" id="injury2" name="injury2" value="heart-atk" />
                 <label for="injury2"> Heart Attack</label><br />
+
                 <input type="checkbox" id="injury3" name="injury3" value="minor-cut" />
                 <label for="injury3"> Minor Cuts</label><br />
-                <input type="checkbox" id="injury4" name="injury4" value="major-cut" />
-                <label for="injury4"> Major Cuts</label><br />
-                <input type="checkbox" id="injury5" name="injury5" value="flu" />
-                <label for="injury5"> Flu</label><br />
+
+                <input type="checkbox" id="injury4" name="injury4" value="minor-injury" />
+                <label for="injury4"> Minor Injury</label><br />
+
+                <input type="checkbox" id="injury5" name="injury5" value="overdose" />
+                <label for="injury5"> Drug Overdose</label><br />
+
                 <input type="checkbox" id="injury6" name="injury6" value="cardiac-arrest"/>
                 <label for="injury6"> Cardiac Arrest</label><br />
-                <input type="checkbox" id="injury7" name="injury7" value="ab-pain" />
-                <label for="injury7"> Abdominal Pain</label><br /><br />
+
+                <input type="checkbox" id="injury7" name="injury7" value="dislocation" />
+                <label for="injury7"> Dislocation</label><br />
+
+                <input type="checkbox" id="injury8" name="injury8" value="flu" />
+                <label for="injury8"> Flu</label><br />
+
+                <input type="checkbox" id="injury9" name="injury9" value="fracture" />
+                <label for="injury9"> Limb Fracture</label><br />
+
+                <input type="checkbox" id="injury10" name="injury10" value="mild-breathing" />
+                <label for="injury10"> Mild Breathing Difficulties</label><br />
+
+                <input type="checkbox" id="injury11" name="injury11" value="severe-pain" />
+                <label for="injury11"> Severe Pain</label><br />
+
+                <input type="checkbox" id="injury12" name="injury12" value="sprain" />
+                <label for="injury12"> Sprain</label><br />
+
+                <input type="checkbox" id="injury13" name="injury13" value="stroke" />
+                <label for="injury13"> Stroke</label><br /><br />
+
                 <label for="injury-zone">Injury Severity Zone<span>*</span>:</label><br />
-           
                 <!-- dropdown option -->
                 <select id="injury-zone" name="injury-zone">
                     <option value="green">Green</option>
@@ -139,10 +174,9 @@
     <div class="prediction-container">
       <h1>Results</h1>
       <p>Predicted capacity:</p>
-      <br/>
-      <p>
-        {{pred}}
-      </p>
+      <h2>
+        {{pred}}%
+      </h2>
       <p>Based on your inputs of:</p>
       <div class="json-temp">
         <p>

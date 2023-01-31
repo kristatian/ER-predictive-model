@@ -1,13 +1,17 @@
+import json
 import server
 
 ##Prediction Generation
-def generate_prediction(username, input_vars):
+def generate_prediction(username, input_vars, scenario_id):
     user_id = server.retrieve_user_id(username)
     if (user_id is None):
         return "User Id does not exist"
     ##send input_vars to model
     ##receive prediction from model
-    server.store_prediction(user_id, input_vars, prediction)
+    if scenario_id is None:
+        scenario_id = server.retrieve_default_scenario_id
+    scenario_number = server.retrieve_current_scenario_number(user_id, scenario_id)
+    server.store_prediction(user_id, input_vars, prediction, scenario_number)
     return prediction
 
 ##User
@@ -16,7 +20,9 @@ def create_user(doc):
     print (user_exists)
     if (user_exists == 1):
         return "Username is Taken"
-    server.create_user(doc["username"], doc["password"])
+    user_id = server.create_user(doc["username"], doc["password"])
+    print(user_id)
+    server.store_scenario(user_id, json.loads('{}'), "default")
     return "Success"
 
 def verify_user(doc):
@@ -40,12 +46,12 @@ def delete_prediction(username, prediction_id):
     return 'Success'
 
 ##What-If Scenarios
-def store_scenarios(username, input_vars):
+def store_scenarios(username, input_vars, name):
     user_id = server.retrieve_user_id(username)
     if (user_id is None):
         return "User Id does not exist"
     print(user_id)
-    server.store_scenario(user_id, input_vars)
+    server.store_scenario(user_id, input_vars, name)
     return 'Success'
 
 def retrieve_scenarios(username):

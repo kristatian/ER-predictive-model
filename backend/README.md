@@ -1,3 +1,9 @@
+# Extra imports required for running the model itself
+- Tensorflow 2.11.0
+- Pandas 1.5.3
+- Joblib 1.2.0
+- Numpy 1.24.1
+
 # Database Set-Up
 
 Software Versions:

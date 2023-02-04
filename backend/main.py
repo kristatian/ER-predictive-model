@@ -8,8 +8,7 @@ app = Flask(__name__)
 def genereate_prediction():
     username = request.headers.get('username')
     request_body = request.get_json()
-    print(request_body)
-    return ERPredict.create_user(request_body) #return everything
+    return ERPredict.generate_prediction(username, request_body) #return everything
 
 #User
 @app.route('/user/create-user', methods=['POST']) ##Verified

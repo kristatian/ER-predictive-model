@@ -1,15 +1,20 @@
 import json
 import server
+import runModel
 
 ##Prediction Generation
-def generate_prediction(username, input_vars, scenario_id):
+def generate_prediction(username, input_vars, scenario_id = None):
     user_id = server.retrieve_user_id(username)
     if (user_id is None):
         return "User Id does not exist"
+
     ##send input_vars to model
+    prediction = runModel.runModel(input_vars)
+
     ##receive prediction from model
     if scenario_id is None:
         scenario_id = server.retrieve_default_scenario_id
+
     scenario_number = server.retrieve_current_scenario_number(user_id, scenario_id)
     server.store_prediction(user_id, input_vars, prediction, scenario_number)
     return prediction

@@ -3,13 +3,13 @@ import server
 import runModel
 
 ##Prediction Generation
-def generate_prediction(username, input_vars, scenario_id = None):
+def generate_prediction(username, input_vars, model=1, scenario_id = None):
     user_id = server.retrieve_user_id(username)
     if (user_id is None):
         return "User Id does not exist"
 
     ##send input_vars to model
-    prediction = runModel.runModel(input_vars)
+    prediction = runModel.runModel(input_vars,model=model)
 
     ##receive prediction from model
     if scenario_id is None:
@@ -17,7 +17,7 @@ def generate_prediction(username, input_vars, scenario_id = None):
 
     scenario_number = server.retrieve_current_scenario_number(user_id, scenario_id)
     server.store_prediction(user_id, input_vars, prediction, scenario_number)
-    return prediction
+    return str(prediction)
 
 ##User
 def create_user(doc):

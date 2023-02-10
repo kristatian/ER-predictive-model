@@ -86,7 +86,7 @@ def scaleData(data,scaler):
 def processData(dataIn,scaler):
     # convert dictionary into dataframe
     df = pd.DataFrame.from_dict([dataIn])
-
+    print(df)
     # convert string values into numericals
     df['Month'] = df['Month'].apply(lambda x: month_map[x])
     df['Day of the week'] = df['Day of the week'].apply(lambda x : week_map[x])
@@ -110,8 +110,20 @@ def processData(dataIn,scaler):
 def formatPrediction():
     print("placeholder")
 
+def getModel(model):
+    if (model == 0):
+        return "saved_model/model_larger_test_2_0"
+    elif(model == 1):
+        return "saved_model/model_larger_test_2_20_percent_2"
+    elif(model == 2):
+        return "saved_model/model_updated1"
+    elif(model == 3):
+        return "saved_model/model_updated2"
+
 # Main code funcitonality
-def runModel(jsonIn,modelLoc = "saved_model/model_updated2", scalerLoc = "scalerNew.gz", isFile = 0, isString = 0):
+def runModel(jsonIn,model=0, scalerLoc = "scalerNew.gz", isFile = 0, isString = 0):
+    # get Model
+    modelLoc = getModel(model)
     # load the model
     model1 = loadModel(modelLoc)
     # load the scaler

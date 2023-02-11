@@ -1,5 +1,6 @@
 import json
 import server
+from flask import session
 
 ##Prediction Generation
 def generate_prediction(username, input_vars, scenario_id):
@@ -29,8 +30,13 @@ def verify_user(doc):
     user_exists = server.check_if_username_exists(doc["username"])
     if (user_exists != 1):
         return "User Does Not Exist"
-    ##Perform user validation here
-    return "Success"
+    user = server.verify_user_creds(doc["username"], doc["password"])
+    if user:
+            session['loggedin'] = True
+            session['id'] = user['user_id']
+            session['username'] = user['username']
+            return 'Success'
+    return "Failure"
 
 ##Prediction History
 def retrieve_history(username):

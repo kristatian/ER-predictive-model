@@ -37,7 +37,26 @@ def check_if_username_exists(username):
     sql = "SELECT COUNT(1) FROM user WHERE username = '%s'" % (username) #Better way to check if exists
     cursor.execute(sql) #make global
     return cursor.fetchone()[0] #Returns 1 if exists otherwise 0
+
+#Retrieve User Credentials
+def get_user_creds(username):
+    sql = "SELECT * FROM user WHERE username = '%s'" % (username) #Better way to check if exists
+    cursor.execute(sql) #make global
+    return cursor.fetchone()#Returns 1 if exists otherwise 0
+
+#Validate User Credentials
+def verify_user_creds(username, password):
+    cursor = db.cursor(dictionary=True)
+    sql = "SELECT * FROM user WHERE username = %s AND pass = %s" #Better way to check if exists
+    values = (username, password)
+    cursor.execute(sql, values) #make global
+    result = cursor.fetchone()#Returns 1 if exists otherwise 0
+    cursor = db.cursor(dictionary=False)
+    return result
       
+
+
+
 
 #Prediction History Functions
 def store_prediction(user_id, input_vars, prediction, scenario_version_number):

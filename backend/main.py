@@ -7,6 +7,13 @@ app.secret_key = "wetestingouthere"
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+##Prediction Generation Function
+@app.route('/predict', methods=['POST'])
+def genereate_prediction():
+    username = request.headers.get('username')
+    #model = request.headers.get('model')
+    request_body = request.get_json()
+    return ERPredict.generate_prediction(username, request_body) #return everything
 
 #User
 @app.route('/user/register', methods=['GET', 'POST'])

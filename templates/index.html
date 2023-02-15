@@ -1,16 +1,16 @@
 {% extends "base.html" %} {% block content %}
 <!-- INTRO AND FORM WITH FIELDS -->
 <div class="home-txt">
-    <p>
-        Welcome to the Emergency Predictive Model Generator. In order to begin, please fill out all variables that are required. They will be marked with a (<span style="color: red">*</span>). 
-        If you would like a more accurate prediction, please fill out as many fields as possible. If not, there will be default values put in on your behalf. For more information about what default values we assume,
-        please read the 'Info' tab.
-    </p><br>
-    <button type="submit" id="testform1" onclick="scenario(text1)">Scenario 1</button>
-    <button type="submit" id="testform2" onclick="scenario(text2)">Scenario 2</button>
-    <button type="submit" id="testform3" onclick="scenario(text3)">Scenario 3</button>
-    <button type="submit" id="testform4" onclick="scenario(text4)">Scenario 4</button>
-    <button type="submit" id="testform5" onclick="scenario(text5)">Scenario 5</button><br><br><br>
+  <br>
+  <h1>Prediction Form</h1><br>
+    <div class="scenario-buttons">
+      <button type="submit" id="testform1" onclick="scenario(text1)">Scenario 1</button>
+      <button type="submit" id="testform2" onclick="scenario(text2)">Scenario 2</button>
+      <button type="submit" id="testform3" onclick="scenario(text3)">Scenario 3</button>
+      <button type="submit" id="testform4" onclick="scenario(text4)">Scenario 4</button>
+      <button type="submit" id="testform5" onclick="scenario(text5)">Scenario 5</button>
+    </div>
+    <br><br><br>
 </div>
 <div class="model-form">
     <div class="row">

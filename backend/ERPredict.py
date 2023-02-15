@@ -5,21 +5,22 @@ from flask import session
 import runModel
 
 ##Prediction Generation
-def generate_prediction(username, input_vars, model=1, scenario_id = None):
+def generate_prediction(username, input_vars, scenario_id):
+    model = 1
     user_id = server.retrieve_user_id(username)
     if (user_id is None):
         return "User Id does not exist"
 
     ##send input_vars to model
-    prediction = runModel.runModel(input_vars,model=model)
+    prediction = str(runModel.runModel(input_vars,model=model))
 
     ##receive prediction from model
     if scenario_id is None:
-        scenario_id = server.retrieve_default_scenario_id
+        scenario_id = server.retrieve_default_scenario_id(user_id)
 
     scenario_number = server.retrieve_current_scenario_number(user_id, scenario_id)
-    server.store_prediction(user_id, input_vars, prediction, scenario_number)
-    return str(prediction)
+    server.store_prediction(user_id, input_vars, scenario_id, prediction, scenario_number)
+    return prediction
 
 ##User
 def create_user(doc):
@@ -63,7 +64,10 @@ def store_scenarios(username, input_vars, name):
     if (user_id is None):
         return "User Id does not exist"
     print(user_id)
-    server.store_scenario(user_id, input_vars, name)
+    try:
+        server.store_scenario(user_id, input_vars, name)
+    except:
+        return "Duplicate Name"
     return 'Success'
 
 def retrieve_scenarios(username):
@@ -72,7 +76,7 @@ def retrieve_scenarios(username):
     scenarios = server.retrieve_scenarios(user_id)
     return scenarios
 
-def remove_scenarios(username, scenario_id):
+def remove_scenario(username, scenario_id):
     user_id = server.retrieve_user_id(username)
     if (user_id is None):
         return "User Id does not exist"

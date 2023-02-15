@@ -11,7 +11,7 @@ CREATE TABLE user (
 CREATE TABLE what_if_scenario(
     scenario_id VARCHAR(36) NOT NULL UNIQUE,
     user_id VARCHAR(36) NOT NULL,
-    scenario_name VARCHAR(255) NOT NULL,
+    scenario_name VARCHAR(255) NOT NULL UNIQUE,
     input_vars JSON NOT NULL,
     archived boolean DEFAULT false,
     PRIMARY KEY (scenario_id),
@@ -37,7 +37,6 @@ CREATE TABLE prediction(
     date_time TIMESTAMP,
     scenario_version_number INTEGER,
     PRIMARY KEY (request_id),
-    FOREIGN KEY (user_id) REFERENCES user(user_id),
     FOREIGN KEY (scenario_id) REFERENCES what_if_scenario(scenario_id)
 );
 

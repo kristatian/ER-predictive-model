@@ -4,6 +4,8 @@ import pandas as pd
 import joblib
 import json
 import numpy as np
+from pathlib import Path
+import os
 
 # global mapping files for data transformation
 month_map = {
@@ -112,22 +114,26 @@ def formatPrediction():
 
 def getModel(model):
     if (model == 0):
-        return "saved_model/model_larger_test_2_0"
+        return "\saved_model\model_larger_test_2_0"
     elif(model == 1):
-        return "saved_model/model_larger_test_2_20_percent_2"
+        return "\saved_model\model_larger_test_2_20_percent_2"
     elif(model == 2):
-        return "saved_model/model_updated1"
+        return "\saved_model\model_updated1"
     elif(model == 3):
-        return "saved_model/model_updated2"
+        return "\saved_model\model_updated2"
+
 
 # Main code funcitonality
-def runModel(jsonIn,model=0, scalerLoc = "scalerNew.gz", isFile = 0, isString = 0):
+def runModel(jsonIn,model=0, scalerLoc = "\\backend\scalerNew.gz", isFile = 0, isString = 0):
     # get Model
-    modelLoc = getModel(model)
+    directory = str(os.getcwd())
+    print(directory)
+    modelLoc = directory + "\\backend" + getModel(model)
     # load the model
     model1 = loadModel(modelLoc)
+    #print(model1.summary())
     # load the scaler
-    scaler1 = loadScaler(scalerLoc)
+    scaler1 = loadScaler(directory + scalerLoc)
     # parse the json inputs
     # depending on user input it can be a file or string
     if (isFile == 1):

@@ -9,11 +9,14 @@ login_manager.init_app(app)
 
 ##Prediction Generation Function
 @app.route('/predict', methods=['POST'])
-def genereate_prediction():
-    username = request.headers.get('username')
-    #model = request.headers.get('model')
-    request_body = request.get_json()
-    return ERPredict.generate_prediction(username, request_body) #return everything
+def generate_prediction():
+    if 'loggedin' in session:
+        username = request.headers.get('username')
+        scenario_id = request.headers.get('scenario_id')
+        #model = request.headers.get('model')
+        request_body = request.get_json()
+        return ERPredict.generate_prediction(username, request_body,scenario_id) #return everything
+    return "Not Logged in"
 
 #User
 @app.route('/user/register', methods=['GET', 'POST'])
@@ -25,9 +28,11 @@ def create_user():
 ##Login
 @app.route('/user/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        request_body = request.get_json()
-    return ERPredict.verify_user(request_body)
+    if 'loggedin' not in session:
+        if request.method == 'POST':
+            request_body = request.get_json()
+        return ERPredict.verify_user(request_body)
+    return "Already Logged In"
 
 ##Logout
 @app.route('/user/logout')
@@ -36,18 +41,6 @@ def logout():
     session.pop('id', None)
     session.pop('username', None)
     return "Success"
-
-
-##Prediction Generation Function
-@app.route('/predict', methods=['POST'])
-def genereate_prediction():
-    if 'loggedin' in session:
-        username = session['username']
-        prediction_id = request.headers.get('prediction-id')
-        request_body = request.get_json()
-        print(request_body)
-        return ERPredict.generate_prediction(username, request_body, prediction_id) #return everything
-    return "Not Logged in"
 
 #Prediction History
 @app.route('/history/get-history', methods=['GET']) ##Verified
@@ -80,16 +73,17 @@ def retrieve_scenarios():
 def store_scenarios():
     if 'loggedin' in session:
         username = session['username']
+        scenario_name = request.headers.get('scenario_name')
         request_body = request.get_json()
-        return ERPredict.store_scenarios(username, request_body)
+        return ERPredict.store_scenarios(username, request_body, scenario_name)
     return "Not Logged in"
 
 @app.route('/scenario/remove-scenario', methods=['DELETE']) ##Verified
-def remove_scenarios():
+def remove_scenario():
     if 'loggedin' in session:
         username = session['username']
         scenario_id = request.headers.get('scenario_id')
-        return ERPredict.remove_scenarios(username, scenario_id)
+        return ERPredict.remove_scenario(username, scenario_id)
     return "Not Logged in"
 
 @app.route('/scenario/update-scenario', methods=['PATCH']) ##Verified

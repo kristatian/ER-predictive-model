@@ -1,7 +1,11 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
+@font-face {
+    font-family: 'Neue Machina';
+    src: url(fonts/PPNeueMachina-PlainLight.otf);
 }
 
+body {
+    font-family: 'Neue Machina';
+}
 span {
     color: red;
 }
@@ -25,8 +29,9 @@ span {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    background-color: #708090;
-    color: white;
+    background-color: #F3F4F4;
+    padding: 20px;
+    color: #11153B;
 }
 
 .home-txt {
@@ -35,12 +40,13 @@ span {
 
 .login-btn {
     background-color: transparent;
-    color: white;
+    color: #11153B;
     border: none;
     font-size: 18px;
     vertical-align: middle;
     display: flex;
     align-items: center;
+    font-family: 'Neue Machina';
 }
 
 .login-btn img {
@@ -55,7 +61,8 @@ span {
     justify-content: space-around;
     width: 100%;
     height: 40px;
-    background-color: darkgrey;
+    background-color: #F3F4F4;
+    padding-bottom: 20px;
 }
 
 .nav-link {
@@ -68,12 +75,11 @@ span {
 
 .navbar a {
     text-decoration: none;
-    color: white;
+    color: #11153B;
     width: 100%;
 }
 
 .nav-link:hover {
-    background-color: #5a6773;
     transition: 0.5s;
     text-decoration: underline;
 }
@@ -86,7 +92,6 @@ span {
     width: 60%;
 }
 
-
 /* Sign-in Modal */
 
 input[type=field] {
@@ -98,7 +103,6 @@ input[type=field] {
     box-sizing: border-box;
 }
 
-
 /* Full-width input fields */
 
 input[type=text],
@@ -109,6 +113,7 @@ input[type=password] {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    
 }
 
 
@@ -156,7 +161,6 @@ span.psw {
 /* Sign-in Modal (background) */
 
 .signin-modal {
-    font-family: Arial, Helvetica, sans-serif;
     display: none;
     /* Hidden by default */
     position: fixed;
@@ -207,9 +211,10 @@ span.psw {
 .modal-content {
     background-color: #fefefe;
     margin: 5% auto 15% auto;
+    padding: 30px;
     /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 40%;
+    border: none;
+    width: 20%;
     /* Could be more or less, depending on screen size */
 }
 
@@ -269,10 +274,10 @@ input[type=submit] {
 }
 
 button {
-    background-color: #04AA6D;
-    color: white;
-    padding: 12px 20px;
-    border: none;
+    background-color: #F3F4F4;
+    color: #070D29;
+    padding: 16px 20px;
+    border: #070D29;
     border-radius: 4px;
     cursor: pointer;
 }
@@ -325,4 +330,50 @@ input[type=submit]:hover {
     .cancelbtn {
         width: 100%;
     }
+}
+
+
+.signin-body {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    background-color: #F3F4F4;
+    font-family: 'Neue Machina', Calibri, Tahoma, sans-serif;
+}
+
+.signin-page {
+    background-color: #F3F4F4;
+    display: flex;
+    font-family: 'Neue Machina', Calibri, Tahoma, sans-serif;
+    flex-direction: column;
+    padding-top: 5%;
+    
+    transform: translateX(30px);
+}
+
+.signin-options {
+    background-color: #F3F4F4;
+    margin-top: 100px;
+}
+
+.signin-options button{
+    background-color: none;
+    border: 1px solid #070D29;
+    border-radius: 0;
+    color: #070D29;
+    text-align: left;
+    display: inline-block;
+    padding: 14px 18px;
+    width: 240px;
+    font-size: 14px;
+    font-family: 'Neue Machina', Calibri, Tahoma, sans-serif;
+}
+
+.name {
+    font-size: 75px;
+    margin-bottom: 0px;
+}
+
+.wave {
+    transform: rotate(115deg);
 }

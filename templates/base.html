@@ -12,91 +12,26 @@
 
 <body>
     <div class="banner-text">
-        <h1>Welcome</h1>
-        <h1>Emergency Predictive Model</h1>
+        <h1>MEDI.PREDICT</h1>
     </div>
 
     <!-- NAVIGATION BAR -->
     <nav class="navbar">
         <div class="nav-link">
-            <a href="index.html">Home</a>
+            <a href="index.html">GENERATE PREDICTION</a>
         </div>
         <div class="nav-link">
-            <a href="info.html">Info</a>
+            <a href="history.html">PREDICTION HISTORY</a>
         </div>
         <div class="nav-link">
-            <a href="history.html">History</a>
+            <a href="info.html">HOW TO</a>
         </div>
         <div class="nav-link">
-            <a href="help.html">Help</a>
-        </div>
-        <div class="nav-link">
-            <button class="login-btn" onclick="document.getElementById('id01').style.display='block'">
-            Sign in
-            <img src="../staticFiles/login-btn.png" height="20px" width="20px"/>
-            </button>
+            <a href="help.html">ABOUT US</a>
         </div>
     </nav>
 
     {% block content %} {% endblock %}
-
-    <!-- SIGN IN MODAL -->
-    <div id="id01" class="signin-modal">
-        <form class="modal-content animate" action="" method="">
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span
-        >
-        <img src="../staticFiles/logo-hospital.png" alt="Avatar" class="avatar" />
-        </div>
-
-        <div class="signin-container">
-        <label for="uname"><b>Username</b></label>
-        <input
-            type="text"
-            placeholder="Enter Username"
-            name="uname"
-            required
-        />
-
-        <label for="psw"><b>Password</b></label>
-        <input
-            type="password"
-            placeholder="Enter Password"
-            name="psw"
-            required
-        />
-
-        <button type="submit">Login</button>
-        <label>
-            <input type="checkbox" checked="checked" name="remember" /> Remember
-            me
-        </label>
-        </div>
-
-        <div class="cancel-container" style="background-color: #f1f1f1">
-        <button
-            type="button"
-            onclick="document.getElementById('id01').style.display='none'"
-            class="cancelbtn"
-        >
-            Cancel
-        </button>
-        <span class="psw">Forgot <a href="#">password?</a></span>
-            </div>
-        </form>
-    </div>
-
-    <script>
-        // Get the modal
-        var modal = document.getElementById("id01");
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        };
-    </script>
 </body>
 
 </html>

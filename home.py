@@ -15,6 +15,10 @@ data_string = '''
 data = json.loads(data_string)
 print(data['prediction'])
 
+@app.route("/")
+def signin():
+    return render_template("signup.html")
+
 @app.route("/index.html", methods=['GET', 'POST'])
 def home():
     # if form is being submitted from POST, get all the form information
@@ -31,7 +35,7 @@ def home():
         facilities = request.form['num-facilities']
         bedsAvailable = request.form['beds-avail']
         popDensity = request.form['pop-density']
-        #injury type missing
+        #injury type
         injuryType = [request.form.get('injury1', ''), 
         request.form.get('injury2', ''),
         request.form.get('injury3', ''),

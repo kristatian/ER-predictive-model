@@ -4,11 +4,16 @@
 - Joblib 1.2.0
 - Numpy 1.24.1
 
+**MODEL DOESN'T WORK UNLESS YOU DOWNLOAD THE ZIP FROM GOOGLE DRIVE AND REPLACE THE SAVED_MODELS FOLDER**
+
+
+
 # Database Set-Up
 
 Software Versions:
 - Python 3.8.2
 - Flask 2.2.2
+- Flask-Login 0.6.2
 - Requests 2.28.2
 - For the MySQL Server and Connector select the default one
 

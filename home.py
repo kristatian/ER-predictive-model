@@ -97,7 +97,7 @@ def help():
     return render_template("help.html")
 
 
-@app.route("/history.html")
+@app.route("/history.html", methods=['GET', 'POST'])
 def history():
     return render_template("history.html")
 

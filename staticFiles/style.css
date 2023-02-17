@@ -113,7 +113,6 @@ input[type=password] {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
-    
 }
 
 
@@ -220,7 +219,6 @@ span.psw {
 
 
 /* Generate Prediction Content/Box */
-
 .modal-content-pred {
     background-color: #fefefe;
     margin: 5% auto 15% auto;
@@ -339,6 +337,7 @@ input[type=submit]:hover {
     justify-items: center;
     background-color: #F3F4F4;
     font-family: 'Neue Machina', Calibri, Tahoma, sans-serif;
+    
 }
 
 .signin-page {
@@ -347,8 +346,7 @@ input[type=submit]:hover {
     font-family: 'Neue Machina', Calibri, Tahoma, sans-serif;
     flex-direction: column;
     padding-top: 5%;
-    
-    transform: translateX(30px);
+    transform: translateX(350px);
 }
 
 .signin-options {

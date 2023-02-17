@@ -68,8 +68,6 @@ def home():
             'Injury Zone': injuryZone}
         ]
 
-        
-        
         return render_template("index.html", test = toJSON, pred = data['prediction'])
 
     return render_template("index.html")

@@ -1,13 +1,24 @@
 {% extends "base.html" %} {% block content %}
 <!-- PREVIOUSLY GENERATED PREDICTIONS -->
-<div class="history-txt">
-    <p>
-        List of Previously Generated Predictions:
-    </p>
-    <a href="index.html" onclick="setScenario(text1)">test1</a>
-    <a href="index.html" onclick="setScenario(text2)">test2</a>
-</div>
+<body onload="loadHistory()">
+    <div class="history-txt">
+        <p>
+            List of Previously Generated Predictions:
+        </p>
+    
+        <ul id="past-gens">
+    
+        </ul>
+        <a href="index.html" onclick="setScenario(text1)">test1</a>
+        <a href="index.html" onclick="setScenario(text2)">test2</a>
+        <a href="index.html" onclick="setScenario(text3)">test3</a>
+        <a href="index.html" onclick="setScenario(text4)">test4</a>
+        <a href="index.html" onclick="setScenario(text5)">test5</a>
+    
+    </div>
+    
+    <script type="text/javascript" src="../staticFiles/test.js"></script>
+</body>
 
-<script type="text/javascript" src="../staticFiles/test.js"></script>
 
 {% endblock %}

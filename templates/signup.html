@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../staticFiles/style.css">
+    <title>Medi.Predict</title>
+</head>
+<body class="signin-body">
+    <div class="signin-page">
+        <h1 class="name">MEDI.PREDICT</h1>
+        <h3 class="name-subheader">Emergency Prepardness Predictive Tool</h3>
+        <div class="signin-options">
+            <div class="temp">
+                <button class="signup-button-main" onclick="document.getElementById('signup').style.display='block'">
+                SIGN UP
+                </button>
+            </div> <br> 
+            <button class="login-button-main" onclick="document.getElementById('login').style.display='block'">LOG IN</button>
+        </div>
+    </div>
+    <img src="../staticFiles/signup-wave.png" alt="Wave" class="wave" />
+
+    <!-- LOG IN MODAL -->
+    <div id="login" class="signin-modal">
+        <form class="modal-content animate" action="" method="">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <img src="../staticFiles/logo-hospital.png" alt="Avatar" class="avatar" />
+            </div>
+                <label for="uname"><b>USERNAME</b></label>
+                <input
+                    type="text"
+                    placeholder="Enter Username"
+                    name="username"
+                    required
+                />
+
+                <label for="psw"><b>PASSWORD</b></label>
+                <input
+                    type="password"
+                    placeholder="Enter Password"
+                    name="psw"
+                    required
+                />
+
+                <button type="submit" onclick="location.href='index.html'">LOG IN</button>
+                <!-- <label>
+                    <input type="checkbox" checked="checked" name="remember" /> Remember
+                    me
+                </label> -->
+            </div>
+
+            <!-- <div class="cancel-container">
+                <button
+                    type="button"
+                    onclick="document.getElementById('login').style.display='none'"
+                    class="cancelbtn">
+                    Cancel
+                </button>
+            </div> -->
+        </form>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("login");
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+
+    <!-- SIGN IN MODAL -->
+    <div id="signup" class="signin-modal">
+        <form class="modal-content animate" action="" method="">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <img src="../staticFiles/logo-hospital.png" alt="Avatar" class="avatar" />
+            </div>
+
+            <div class="signin-container">
+                <label for="uname"><b>USERNAME</b></label>
+                <input
+                    type="text"
+                    placeholder="Please Enter a Username"
+                    name="fname"
+                    required
+                />
+
+                <label for="psw"><b>PASSWORD</b></label>
+                <input
+                    type="password"
+                    placeholder="Please Enter a Password"
+                    name="psw"
+                    required
+                />
+
+                <button type="submit">SIGN UP</button>
+                <!-- <label>
+                    <input type="checkbox" checked="checked" name="remember" /> Remember
+                    me
+                </label> -->
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("signup");
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+</body>
+</html>

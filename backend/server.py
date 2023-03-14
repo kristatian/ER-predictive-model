@@ -5,12 +5,15 @@ import functools
 import operator
 import json
 
-db = mysql.connect(
-    host = "localhost",
-    user = "our_info_here",
-    passwd = "your_info_here",
-    database = "erDB"
-)
+config = {
+        'host': 'db',
+        'user': 'root',
+        'password': 'root',
+        'port': '3306',
+        'database': 'erDB'
+    }
+
+db = mysql.connect(**config)
 #cursor = db.cursor()
 cursor = db.cursor(buffered=True)
 

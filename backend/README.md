@@ -1,11 +1,20 @@
+
+**MODEL DOESN'T WORK UNLESS YOU DOWNLOAD THE ZIP FROM GOOGLE DRIVE AND REPLACE THE SAVED_MODELS FOLDER**
+
+**Run "docker run <image_name>"**
+
+# Running the Backend and Database Using Docker and Github
+**Install Docker cli/desktop**
+
+**In the main (ER-Predictive-model) directory (not backend folder) run "docker-compose up --build -d"**
+
+**Profit???**
+
 # Extra imports required for running the model itself
 - Tensorflow 2.11.0
 - Pandas 1.5.3
 - Joblib 1.2.0
 - Numpy 1.24.1
-
-**MODEL DOESN'T WORK UNLESS YOU DOWNLOAD THE ZIP FROM GOOGLE DRIVE AND REPLACE THE SAVED_MODELS FOLDER**
-
 
 
 # Database Set-Up

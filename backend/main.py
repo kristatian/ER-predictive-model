@@ -45,9 +45,6 @@ def logout():
 #Prediction History
 @app.route('/history/get-history', methods=['GET']) ##Verified
 def retrieve_history():
-    print(session['loggedin'])
-    print(session['id'])
-    print(session['username'])
     if 'loggedin' in session:
         username = session['username']
         return ERPredict.retrieve_history(username)
@@ -98,4 +95,4 @@ def update_scenario():
 
 if __name__ == '__main__':
     # run app in debug mode on port 5000
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host="0.0.0.0")

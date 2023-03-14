@@ -114,21 +114,22 @@ def formatPrediction():
 
 def getModel(model):
     if (model == 0):
-        return "\saved_model\model_larger_test_2_0"
+        return "/saved_model/model_larger_test_2_0"
     elif(model == 1):
-        return "\saved_model\model_larger_test_2_20_percent_2"
+        return "/saved_model/model_larger_test_2_20_percent_2"
     elif(model == 2):
-        return "\saved_model\model_updated1"
+        return "/saved_model/model_updated1"
     elif(model == 3):
-        return "\saved_model\model_updated2"
+        return "/saved_model/model_updated2"
 
 
 # Main code funcitonality
-def runModel(jsonIn,model=0, scalerLoc = "\\backend\scalerNew.gz", isFile = 0, isString = 0):
+def runModel(jsonIn,model=0, scalerLoc = "/scalerNew.gz", isFile = 0, isString = 0):
     # get Model
-    directory = str(os.getcwd())
+    directory = os.path.dirname(os.path.realpath(__file__))
+    directory = directory.replace(os.sep, '/')
     print(directory)
-    modelLoc = directory + "\\backend" + getModel(model)
+    modelLoc = directory + getModel(model)
     # load the model
     model1 = loadModel(modelLoc)
     #print(model1.summary())
@@ -150,7 +151,6 @@ def runModel(jsonIn,model=0, scalerLoc = "\\backend\scalerNew.gz", isFile = 0, i
     print(prediction)
     # return the prediction value to the caller
     return prediction[0][0]
-
 # debug run 
 if __name__ == '__main__':
     runModel('''{

@@ -17,7 +17,7 @@ print(data['prediction'])
 
 @app.route("/")
 def signin():
-    return render_template("login.html")
+    return render_template("signup.html")
 
 @app.route("/index.html", methods=['GET', 'POST'])
 def home():
@@ -44,13 +44,13 @@ def home():
             'Month': month,
             'Average Age of province': avgAge,
             'Day of the week': dayOfWeek, 
-            'Holiday': holiday, 
-            'Time of Day': timeOfDay, 
+            holiday: 1, 
+            timeOfDay: 1, 
             'Weather': weather, 
             'number of Health care facilities in a 50km radius': facilities,
             'Hospital Beds per 1000 people': bedsAvailable, 
             'Population Density /square km (Hospital Location Marker)': popDensity, 
-            'Injury Type': injuryType,
+            injuryType: 1,
             'Injury Zone': injuryZone}
         ]
 
@@ -80,18 +80,12 @@ def info():
 
 @app.route("/help.html")
 def help():
-    return render_template("help.html")
+    return render_template("login.html")
 
 
 @app.route("/history.html", methods=['GET', 'POST'])
 def history():
     return render_template("history.html")
-
-@app.route('/logout', methods=['GET', 'POST'])
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('login'))
 
 
 # running app

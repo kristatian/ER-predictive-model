@@ -17,7 +17,7 @@ print(data['prediction'])
 
 @app.route("/")
 def signin():
-    return render_template("signup.html")
+    return render_template("login.html")
 
 @app.route("/index.html", methods=['GET', 'POST'])
 def home():
@@ -86,6 +86,12 @@ def help():
 @app.route("/history.html", methods=['GET', 'POST'])
 def history():
     return render_template("history.html")
+
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 
 # running app

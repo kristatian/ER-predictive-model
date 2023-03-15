@@ -21,7 +21,6 @@ def signin():
 
 @app.route("/index.html", methods=['GET', 'POST'])
 def home():
-    # if form is being submitted from POST, get all the form information
     if request.method == 'POST':
         gdp = request.form['gdp-year']
         inflationRate = request.form['inflation-rate']
@@ -35,20 +34,7 @@ def home():
         facilities = request.form['num-facilities']
         bedsAvailable = request.form['beds-avail']
         popDensity = request.form['pop-density']
-        #injury type
-        injuryType = [request.form.get('injury1', ''), 
-        request.form.get('injury2', ''),
-        request.form.get('injury3', ''),
-        request.form.get('injury4', ''),
-        request.form.get('injury5', ''),
-        request.form.get('injury6', ''),
-        request.form.get('injury7', ''),
-        request.form.get('injury8', ''),
-        request.form.get('injury9', ''),
-        request.form.get('injury10', ''),
-        request.form.get('injury11', ''),
-        request.form.get('injury12', ''),
-        request.form.get('injury13', '')]
+        injuryType = request.form['injury-type-ans']
         injuryZone = request.form['injury-zone']
 
         toJSON = [
@@ -99,49 +85,9 @@ def help():
 
 @app.route("/history.html", methods=['GET', 'POST'])
 def history():
-    print("rendering history")
     return render_template("history.html")
 
 
 # running app
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
-
-
-
-
-
-
-
-# activeSeizure = request.form['injury1']
-        # heartAttack = request.form['injury2']
-        # minorCuts = request.form['injury3']
-        # minorInjury = request.form['injury4']
-        # drugOverdose = request.form['injury5']
-        # cardiacArrest = request.form['injury6']
-        # dislocation = request.form['injury7']
-        # flu = request.form['injury8']
-        # limbFracture = request.form['injury9']
-        # mildBreathing = request.form['injury10']
-        # severePain = request.form['injury11']
-        # sprain = request.form['injury12']
-        # stroke = request.form['injury13']
-
-
-# 'Active Seizure': activeSeizure,
-            # 'Heart Attack': heartAttack,
-            # 'Minor Cuts': minorCuts,
-            # 'Minor Injury': minorInjury,
-            # 'Drug Overdose': drugOverdose,
-            # 'Cardiac Arrest': cardiacArrest, 
-            # 'Dislocation': dislocation,
-            # 'Flu': flu,
-            # 'Limb Fracture': limbFracture,
-            # 'Mild Breathing difficulties': mildBreathing,
-            # 'Severe Pain': severePain,
-            # 'Sprain': sprain,
-            # 'Stroke': stroke,

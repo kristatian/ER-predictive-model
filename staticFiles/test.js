@@ -1,8 +1,8 @@
-const text1 = '{"gdp-year": "1.45", "inflation-rate": "4.9%", "pandemic-ans": "No", "month": "December", "average-age": "55", "day-of-wk": "Monday", "Christmas Day" : "1", "Past Midnight" : "1", "weather": "Sunny", "num-facilities": "2","beds-avail": "23", "pop-density": "34", "injury-type-ans": "Minor Injury" ,"injury-zone": "red"}';
-const text2 = '{"gdp-year": "23", "inflation-rate": "34.6%", "pandemic-ans": "Yes", "month": "August", "average-age": "23", "day-of-wk": "Tuesday", "Halloween" : "1", "Early Evening" : "1", "weather": "Thunderstorm", "num-facilities": "23","beds-avail": "21", "pop-density": "645", "injury-type-ans": "Severe Pain", "injury-zone": "green"}';
-const text3 = '{"gdp-year": "544.2", "inflation-rate": "1%", "pandemic-ans": "No", "month": "January", "average-age": "65", "day-of-wk": "Wednesday", "Easter Sunday" : "1", "time": "Late Afternoon", "weather": "Snowing", "num-facilities": "65","beds-avail": "5", "pop-density": "243", "injury-type-ans": "Cardiac Arrest", "injury-zone": "yellow"}';
-const text4 = '{"gdp-year": "243.654", "inflation-rate": "7.45%", "pandemic-ans": "Yes", "month": "January", "average-age": "33", "day-of-wk": "Thursday", "New Year\'s Day" : "1", "time": "Late Evening", "weather": "Foggy", "num-facilities": "9","beds-avail": "435", "pop-density": "36344", "injury-type-ans": "Flu", "injury-zone": "red"}';
-const text5 = '{"gdp-year": "13", "inflation-rate": "0%", "pandemic-ans": "Yes", "month": "September", "average-age": "90", "day-of-wk": "Friday", "Super bowl" : "1", "time": "Past Midnight", "weather": "Humid", "num-facilities": "0","beds-avail": "877", "pop-density": "7", "injury-type-ans": "Drug Overdose", "injury-zone": "green"}';
+const text1 = '{"gdp-year": "1.45", "inflation-rate": "4.9%", "pandemic-ans": "No", "month": "December", "average-age": "55", "day-of-wk": "Monday", "Christmas Day" : "1", "Past Midnight" : "1", "weather": "Sunny", "num-facilities": "2","beds-avail": "23", "pop-density": "34", "Minor Injury" : "1" ,"injury-zone": "red"}';
+const text2 = '{"gdp-year": "23", "inflation-rate": "34.6%", "pandemic-ans": "Yes", "month": "August", "average-age": "23", "day-of-wk": "Tuesday", "Halloween" : "1", "Early Evening" : "1", "weather": "Thunderstorm", "num-facilities": "23","beds-avail": "21", "pop-density": "645", "Severe Pain" : "1", "injury-zone": "green"}';
+const text3 = '{"gdp-year": "544.2", "inflation-rate": "1%", "pandemic-ans": "No", "month": "January", "average-age": "65", "day-of-wk": "Wednesday", "Easter Sunday" : "1", "Late Afternoon" : "1", "weather": "Snowing", "num-facilities": "65","beds-avail": "5", "pop-density": "243", "Cardiac Arrest" : "1", "injury-zone": "yellow"}';
+const text4 = '{"gdp-year": "243.654", "inflation-rate": "7.45%", "pandemic-ans": "Yes", "month": "January", "average-age": "33", "day-of-wk": "Thursday", "New Year\'s Day" : "1", "Late Evening" : "1", "weather": "Foggy", "num-facilities": "9","beds-avail": "435", "pop-density": "36344", "Flu" : "1", "injury-zone": "red"}';
+const text5 = '{"gdp-year": "13", "inflation-rate": "0%", "pandemic-ans": "Yes", "month": "September", "average-age": "90", "day-of-wk": "Friday", "Super bowl" : "1", "Past Midnight" : "1", "weather": "Humid", "num-facilities": "0","beds-avail": "877", "pop-density": "7", "Drug Overdose" : "1", "injury-zone": "green"}';
 
 function setScenario(scenario) {
   if (localStorage.getItem("scenario") == null) {
@@ -20,9 +20,14 @@ function loadText() {
     }
     
     text = localStorage.getItem("scenario");
-    
     const myArr = JSON.parse(text);
 
+    keysArr = [];
+    for (key in myArr) {
+      keysArr.push(key);
+    }
+
+    console.log(keysArr)
     if (!(Object.keys(myArr).length === 0)) {
       const gdp = document.getElementById('gdp-year');
       gdp.value = myArr["gdp-year"];
@@ -49,11 +54,11 @@ function loadText() {
       day.value = myArr["day-of-wk"];
 
       const hol = document.getElementById('holiday');
-      hol.value = myArr[7];
+      hol.value = keysArr[6];
       
 
       const timeOfDay = document.getElementById('time');
-      timeOfDay.value = myArr[8].value;
+      timeOfDay.value = keysArr[7];
 
       const weather = document.getElementById('weather');
       weather.value = myArr["weather"];
@@ -81,31 +86,31 @@ function loadText() {
       const itSprain = document.getElementById('sprain');
       const itStroke = document.getElementById('stroke');
 
-      if (myArr[13].value == 'Active Seizure') {
+      if (keysArr[12] == 'Active Seizure') {
         itSeizure.checked = true;
-      } else if (myArr[13].value == 'Heart Attack') {
+      } else if (keysArr[12] == 'Heart Attack') {
         itHeartAtk.checked = true;
-      } else if (myArr[13].value == 'Minor Cuts') {
+      } else if (keysArr[12] == 'Minor Cuts') {
         itMinorCut.checked = true;
-      } else if (myArr[13].value == 'Minor Injury') {
+      } else if (keysArr[12] == 'Minor Injury') {
         itMinorInjury.checked = true;
-      } else if (myArr[13].value == 'Drug Overdose') {
+      } else if (keysArr[12] == 'Drug Overdose') {
         itOverdose.checked = true;
-      } else if (myArr[13].value == 'Cardiac Arrest') {
+      } else if (keysArr[12] == 'Cardiac Arrest') {
         itCardiacArrest.checked = true;
-      } else if (myArr[13].value == 'Dislocation') {
+      } else if (keysArr[12] == 'Dislocation') {
         itDislocation.checked = true;
-      } else if (myArr[13].value == 'Flu') {
+      } else if (keysArr[12] == 'Flu') {
         itFlu.checked = true;
-      } else if (myArr[13].value == 'Fracture') {
+      } else if (keysArr[12] == 'Fracture') {
         itFracture.checked = true;
-      } else if (myArr[13].value == 'Mild Breathing Difficulties') {
+      } else if (keysArr[12] == 'Mild Breathing Difficulties') {
         itMildBreathing.checked = true;
-      } else if (myArr[13].value == 'Severe Pain') {
+      } else if (keysArr[12] == 'Severe Pain') {
         itSeverePain.checked = true;
-      } else if (myArr[13].value == 'Sprain') {
+      } else if (keysArr[12] == 'Sprain') {
         itSprain.checked = true;
-      } else if (myArr[13].value == 'Stroke') {
+      } else if (keysArr[12] == 'Stroke') {
         itStroke.checked = true;
       }
 
@@ -125,7 +130,11 @@ document.getElementById('prediction-form').addEventListener('submit', function(e
   const form = new FormData(document.getElementById('prediction-form'));
   var object = {};
   form.forEach(function(value, key){
+    if (key == 'time' || key == 'holiday' || key == 'injury-type-ans') {
+      object[value] = 1;
+    } else {
       object[key] = value;
+    } 
   });
   var json = JSON.stringify(object);
   

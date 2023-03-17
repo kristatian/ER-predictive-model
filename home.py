@@ -12,7 +12,7 @@ data_string = '''
     "prediction": "40", 
     "date": "Jan 24, 2023",
     "time": "12:23:45 AM EST"
-}
+} 
 '''  
 session = requests.Session()
 data = json.loads(data_string)
@@ -68,7 +68,7 @@ def signin():
             print("Successful register")
         # if possible display a fail/success message...
     return render_template("signup.html")
-
+ 
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():
     response = requests.get(baseUrl+"/user/logout",cookies={'session':request.cookies.get("session")})

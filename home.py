@@ -2,13 +2,14 @@ from flask import Flask, flash, redirect, render_template, request, session, abo
 import requests
 import json
 from hashlib import sha256
+import copy
 
 # creates instance of Flask app
 app = Flask(__name__, template_folder='templates', static_folder='staticFiles')
 app.secret_key = "wetestingouthere"
 data_string = '''
-{
-    "prediction": "40",
+{ 
+    "prediction": "40", 
     "date": "Jan 24, 2023",
     "time": "12:23:45 AM EST"
 }
@@ -19,6 +20,10 @@ print(data['prediction'])
 
 # change to actual address once hosting is done, this is for debugging only
 baseUrl = 'http://127.0.0.1:5000/'
+
+# valid weather mapping
+validWeather = ['Foggy', 'Ice Snow', 'Rainy', 'Snowy', 'Windy']
+
 
 @app.route("/", methods=['GET', 'POST']) 
 def appStart():
@@ -31,9 +36,10 @@ def login():
     #print(session)
     if('username' in request.form):
         # call login function 
-        response = session.post(baseUrl+"/user/login",json={'username':request.form.get('username'),'password':sha256(request.form.get('psw').encode('utf-8')).hexdigest()})
+        response = requests.post(baseUrl+"/user/login",json={'username':request.form.get('username'),'password':sha256(request.form.get('psw').encode('utf-8')).hexdigest()},cookies={'session':request.cookies.get("session")})
         #response = requests.post(baseUrl+"/user/login",json={'username':request.form.get('username'),'password':sha256(request.form.get('psw').encode('utf-8')).hexdigest()})
         print(response.cookies) 
+        print(response.content)
         # if return is success
         if('Success' in str(response.content)):
             # move to index.html and store username as cookie
@@ -41,6 +47,7 @@ def login():
             resp = make_response(render_template("index.html"))
             #resp = make_response()
             resp.set_cookie('userID', request.form.get('username'))
+            resp.set_cookie('session', response.cookies['session'])
             return resp
         else:
             return render_template("signup.html")
@@ -55,7 +62,7 @@ def signin():
         # call sign in function and display signup page again
         print("signup") 
         #/user/register
-        response = session.post(baseUrl+"/user/register",json={'username':request.form.get('fname'),'password':sha256(request.form.get('psw').encode('utf-8')).hexdigest()})
+        response = requests.post(baseUrl+"/user/register",json={'username':request.form.get('fname'),'password':sha256(request.form.get('psw').encode('utf-8')).hexdigest()},cookies={'session':request.cookies.get("session")})
         #print(response.content)
         if('Success' in str(response.content)):
             print("Successful register")
@@ -64,9 +71,14 @@ def signin():
 
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():
-    response = session.get(baseUrl+"/user/logout")
+    response = requests.get(baseUrl+"/user/logout",cookies={'session':request.cookies.get("session")})
     resp = make_response(render_template("signup.html"))
-    resp.set_cookie('userID', '')
+    resp.set_cookie('userID', '',expires=0)
+    if (session in response.cookies):
+        resp.set_cookie('session', response.cookies['session'])
+    else:
+        resp.set_cookie('session', '',expires=0)
+
     print("return to signup.html")
     
     return resp
@@ -89,8 +101,7 @@ def home():
         injuryType = request.form['injury-type-ans']
         injuryZone = request.form['injury-zone']
 
-        toJSON = [
-            {'GDP of the year (in trillion USD)': gdp, 
+        toJSON =  {'GDP of the year (in trillion USD)': gdp, 
             'Inflation Rate': inflationRate, 
             'Pandemic': pandemic, 
             'Month': month,
@@ -104,19 +115,39 @@ def home():
             'Population Density /square km (Hospital Location Marker)': popDensity, 
             injuryType: 1,
             'Injury Zone': injuryZone}
-        ]
+        sentJson = copy.deepcopy(toJSON)
+        # quick json pre-processing 
+        if(not weather in validWeather):
+            del toJSON[weather]
+  
+        if ('None' in holiday):
+            del toJSON[holiday]
+
+        if('Early Afternoon' in timeOfDay):
+            del toJSON[timeOfDay]
+
+        if('Abdominal Pain' in injuryType):
+            del toJSON[injuryType]
+        
+        print(toJSON)
+
         scenarioId = request.cookies.get("scenarioId")
         userName = request.cookies.get("userID")
+
         #headers = {'scenario_id': scenarioId,'username':userName}
         headers = {'username':userName}
-
-        print(toJSON)
+ 
+        print(toJSON) 
         # run api call to backend api
-        response = session.post(baseUrl+"/predict",json=toJSON[0],headers=headers)
+        response = requests.post(baseUrl+"/predict",json=toJSON,headers=headers,cookies={'session':request.cookies.get("session")})
         stringPrediction = response.content.decode("utf-8")
         print(stringPrediction)
-        return render_template("index.html", test = toJSON, pred = stringPrediction)
-
+        return render_template("index.html", test = sentJson, pred = stringPrediction, displayResult = 'True')
+    else:   
+        # check if session exists
+        if(request.cookies.get("session") is None):
+            return render_template("signup.html")
+    
     return render_template("index.html")
 
 @app.route("/api", methods=['GET', 'POST'])

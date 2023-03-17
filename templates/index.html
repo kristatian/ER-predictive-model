@@ -1,6 +1,6 @@
   {% extends "base.html" %} {% block content %}
   <!-- INTRO AND FORM WITH FIELDS -->
-<body onload="loadText()">
+<body onload="displayResults()">
   <div class="home-txt">
     <br>
     <h1>Prediction Form</h1><br>
@@ -68,6 +68,7 @@
                   <label for="holiday">Holiday:</label><br />
                   <!-- dropdown option -->
                   <select id="holiday" name="holiday">
+                      <option value="None">None</option>
                       <option value="Christmas Day">Christmas Day</option>
                       <option value="New Year's Eve">New Year's Eve</option>
                       <option value="New Year's Day">New Year's Day</option>
@@ -140,10 +141,10 @@
                   <input type="radio" id="flu" name="injury-type-ans" value="Flu"/>
                   <label for="flu">Flu</label><br />
 
-                  <input type="radio" id="fracture" name="injury-type-ans" value="Fracture"/>
+                  <input type="radio" id="Limb Fracture" name="injury-type-ans" value="Limb Fracture"/>
                   <label for="fracture">Limb Fracture</label><br />
 
-                  <input type="radio" id="mild-breathing" name="injury-type-ans" value="Mild Breathing Difficulties"/>
+                  <input type="radio" id="mild-breathing" name="injury-type-ans" value="Mild Breathing difficulties"/>
                   <label for="mild-breathing">Mild Breathing Difficulties</label><br />
 
                   <input type="radio" id="severe-pain" name="injury-type-ans" value="Severe Pain"/>
@@ -151,6 +152,9 @@
 
                   <input type="radio" id="sprain" name="injury-type-ans" value="Sprain"/>
                   <label for="sprain">Sprain</label><br />
+
+                  <input type="radio" id="Abdominal Pain" name="injury-type-ans" value="Abdominal Pain"/>
+                  <label for="Abdominal-Pain">Abdominal Pain</label><br />
 
                   <input type="radio" id="stroke" name="injury-type-ans" value="Stroke"/>
                   <label for="stroke">Stroke</label><br /><br />
@@ -163,7 +167,7 @@
                       <option value="Red">Red</option>
                   </select>
               </div>
-              <input type="submit" value="Generate"/>
+              <input type="submit" value="Generate" />
               
           </form> 
           <br>
@@ -213,6 +217,12 @@
       document.getElementById('holiday').value = "Christmas Day";
       document.getElementById('injury-zone').value = "green";
       document.getElementById('time').value = "Early Morning";
+    }
+    function displayResults() {
+      if ("{{ displayResult }}" == "True") {
+        document.getElementById('id02').style.display='block';
+      }
+      loadText()
     }
   </script>
   <script type="text/javascript" src="../staticFiles/test.js"></script>

@@ -96,8 +96,15 @@
                       <option value="Past Midnight">Past Midnight</option>
                   </select>
                   <br /><br />
+                  
                   <label for="weather">Weather:</label><br />
-                  <input type="field" id="weather" name="weather" value="Windy"/>
+                  <select id="weather" name="weather">
+                    <option value="Foggy">Foggy</option>
+                    <option value="Ice Snow">Ice Snow</option>
+                    <option value="Rainy">Rainy</option>
+                    <option value="Snowy">Snowy</option>
+                    <option value="Windy">Windy</option>
+                  </select>
                   <br /><br />
 
                   <label for="facilities">Healthcare Facilities Within 50km Radius:</label><br />
@@ -158,9 +165,9 @@
                   <label for="injury-zone">Injury Severity Zone<span>*</span>:</label><br />
                   <!-- dropdown option -->
                   <select id="injury-zone" name="injury-zone">
-                      <option value="green">Green</option>
-                      <option value="yellow">Yellow</option>
-                      <option value="red">Red</option>
+                      <option value="Green">Green</option>
+                      <option value="Yellow">Yellow</option>
+                      <option value="Red">Red</option>
                   </select>
               </div>
               <input type="submit" value="Generate"/>
@@ -168,7 +175,7 @@
           </form>
           <br>
           <button type="submit" id="testbut" onclick="document.getElementById('id02').style.display='block'">See Results</button>
-          <button type="submit" onclick="location.href='/'">LOG OUT</button>
+          <button type="submit" onclick="location.href='/'">Log Out</button>
       </div>
   </div>
 

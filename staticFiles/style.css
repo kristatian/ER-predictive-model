@@ -1,10 +1,10 @@
 @font-face {
-    font-family: 'Neue Machina';
-    src: url(fonts/PPNeueMachina-PlainLight.otf);
+    font-family: 'Montserrat';
+    src: url(fonts/Montserrat-VariableFont_wght.ttf);
 }
 
 body {
-    font-family: 'Neue Machina';
+    font-family: 'Montserrat';
 }
 span {
     color: red;
@@ -28,8 +28,9 @@ span {
     align-items: center;
     width: 100%;
     background-color: #F3F4F4;
-    justify-content: center;
     padding-bottom: 20px;
+    align-items: center;
+    justify-content: center;
     padding-top: 20px;
     color: #11153B;
 }
@@ -46,11 +47,22 @@ span {
     vertical-align: middle;
     display: flex;
     align-items: center;
-    font-family: 'Neue Machina';
+    font-family: 'Montserrat';
 }
 
 .login-btn img {
     margin-left: 5px;
+}
+
+.input-vars {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.input-vars ul{
+    display: flex;
+    flex-direction: column;
 }
 
 .navbar {
@@ -71,6 +83,10 @@ span {
     align-items: center;
     text-align: center;
     width: 100%;
+}
+
+.nav-link button {
+    font-size: 18px;
 }
 
 .navbar a {
@@ -147,6 +163,18 @@ img.avatar {
     text-align: center;
 }
 
+/*
+.json-temp {
+    display: flex;
+    text-align: left;
+}
+
+.json-temp .input-vars{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+*/
 .cancel-container {
     padding: 16px;
 }
@@ -204,7 +232,6 @@ span.psw {
     padding-top: 60px;
 }
 
-
 /* Sign-in Modal Content/Box */
 
 .modal-content {
@@ -228,7 +255,6 @@ span.psw {
     /* Could be more or less, depending on screen size */
 }
 
-
 /* The Close Button (x) */
 
 .close {
@@ -246,7 +272,13 @@ span.psw {
     cursor: pointer;
 }
 
+input {
+    font-family: Montserrat;
+}
 
+select {
+    font-family: Montserrat;
+}
 /* help page contact form */
 
 input[type=text],
@@ -262,10 +294,18 @@ textarea {
     resize: vertical;
 }
 
+input {
+    font-family: Montserrat;
+}
+
+select {
+    font-family: Montserrat;
+}
+
 input[type=submit] {
     background-color: #04AA6D;
     color: white;
-    padding: 12px 20px;
+    padding: 16px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -278,6 +318,7 @@ button {
     border: #070D29;
     border-radius: 4px;
     cursor: pointer;
+    font-family: Montserrat;
 }
 
 input[type=submit]:hover {
@@ -336,14 +377,14 @@ input[type=submit]:hover {
     align-items: center;
     justify-items: center;
     background-color: #F3F4F4;
-    font-family: 'Neue Machina', Calibri, Tahoma, sans-serif;
+    font-family: 'Montserrat', Calibri, Tahoma, sans-serif;
     
 }
 
 .signin-page {
     background-color: #F3F4F4;
     display: flex;
-    font-family: 'Neue Machina', Calibri, Tahoma, sans-serif;
+    font-family: 'Montserrat', Calibri, Tahoma, sans-serif;
     flex-direction: column;
     padding-top: 5%;
     transform: translateX(350px);
@@ -364,7 +405,7 @@ input[type=submit]:hover {
     padding: 14px 18px;
     width: 240px;
     font-size: 14px;
-    font-family: 'Neue Machina', Calibri, Tahoma, sans-serif;
+    font-family: 'Montserrat', Calibri, Tahoma, sans-serif;
 }
 
 .name {

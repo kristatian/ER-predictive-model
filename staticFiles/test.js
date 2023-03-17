@@ -4,13 +4,15 @@ const text3 = '{"gdp-year": "5", "inflation-rate": "1", "pandemic-ans": "No", "m
 const text4 = '{"gdp-year": "3", "inflation-rate": "7.45", "pandemic-ans": "Yes", "month": "January", "average-age": "33", "day-of-wk": "Thursday", "New Year\'s Day" : "1", "Late Evening" : "1", "weather": "Foggy", "num-facilities": "9","beds-avail": "4", "pop-density": "36344", "Flu" : "1", "injury-zone": "Red"}';
 const text5 = '{"gdp-year": "0.5", "inflation-rate": "0.5", "pandemic-ans": "Yes", "month": "September", "average-age": "90", "day-of-wk": "Friday", "None" : "1", "Past Midnight" : "1", "weather": "Rainy", "num-facilities": "1","beds-avail": "7", "pop-density": "7", "Drug Overdose" : "1", "injury-zone": "Green"}';
 
+
 function setScenario(scenario,scenarioId) {
   if (localStorage.getItem("scenario") == null) {
     localStorage.setItem("scenario", "{}");
     console.log("initializing scenario");
   }
   localStorage.setItem("scenario", scenario);
-  console.log(scenario);
+
+  console.log("scenario: " + scenario);
   document.cookie = "scenarioId=" + scenarioId;
   loadText();
 }
@@ -119,6 +121,7 @@ function loadText() {
       zone.value = myArr["injury-zone"];
       
       localStorage.setItem("scenario", "{}");
+      //location.reload();
     }
 }
 

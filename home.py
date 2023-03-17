@@ -115,6 +115,7 @@ def home():
             'Population Density /square km (Hospital Location Marker)': popDensity, 
             injuryType: 1,
             'Injury Zone': injuryZone}
+
         sentJson = copy.deepcopy(toJSON)
         # quick json pre-processing 
         if(not weather in validWeather):
@@ -148,6 +149,7 @@ def home():
         if(request.cookies.get("session") is None):
             return render_template("signup.html")
     
+
     return render_template("index.html")
 
 @app.route("/api", methods=['GET', 'POST'])

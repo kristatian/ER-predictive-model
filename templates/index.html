@@ -5,17 +5,17 @@
     <br>
     <h1>Prediction Form</h1><br>
       <div class="scenario-buttons">
-        <button type="submit" id="testform1" onclick="setScenario(text1)">Midnight on Christmas Day</button>
-        <button type="submit" id="testform2" onclick="setScenario(text2)">Evening of Halloween During Storm</button>
-        <button type="submit" id="testform3" onclick="setScenario(text3)">Regular Snowy Day</button>
-        <button type="submit" id="testform4" onclick="setScenario(text4)">Evening of New Year's Day</button>
-        <button type="submit" id="testform5" onclick="setScenario(text5)">Regular Day In Pandemic</button>
+        <button type="submit" id="testform1" onclick="setScenario(text1,1)">Midnight on Christmas Day</button>
+        <button type="submit" id="testform2" onclick="setScenario(text2,2)">Evening of Halloween During Storm</button>
+        <button type="submit" id="testform3" onclick="setScenario(text3,3)">Regular Snowy Day</button>
+        <button type="submit" id="testform4" onclick="setScenario(text4,4)">Evening of New Year's Day</button>
+        <button type="submit" id="testform5" onclick="setScenario(text5,5)">Regular Day In Pandemic</button>
       </div>
       <br><br><br>
   </div>
   <div class="model-form">
       <div class="row">
-          <form name="pred-form" action="#" id="prediction-form" method="POST">
+          <form name="pred-form" action="index.html" id="prediction-form" method="POST">
               <div class="column">
                   <label for="gdp">GDP of Year (in trillions USD):</label><br />
                   <input type="field" id="gdp-year" name="gdp-year" value="1.53" /><br /><br />
@@ -158,17 +158,17 @@
                   <label for="injury-zone">Injury Severity Zone<span>*</span>:</label><br />
                   <!-- dropdown option -->
                   <select id="injury-zone" name="injury-zone">
-                      <option value="green">Green</option>
-                      <option value="yellow">Yellow</option>
-                      <option value="red">Red</option>
+                      <option value="Green">Green</option>
+                      <option value="Yellow">Yellow</option>
+                      <option value="Red">Red</option>
                   </select>
               </div>
               <input type="submit" value="Generate"/>
               
-          </form>
+          </form> 
           <br>
           <button type="submit" id="testbut" onclick="document.getElementById('id02').style.display='block'">See Results</button>
-          <button type="submit" onclick="location.href='/'">LOG OUT</button>
+          <button type="submit" onclick="location.href='/logout'">LOG OUT</button>
       </div>
   </div>
 

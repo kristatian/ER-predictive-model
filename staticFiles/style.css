@@ -35,16 +35,6 @@ span {
     color: #11153B;
 }
 
-.banner-text button {
-    margin-left: auto;
-    margin-right: 360px;
-    font-size: 18px;
-}
-
-.banner-text h1 {
-    margin-left: 700px;
-}
-
 .home-txt {
     font-size: 16px;
 }
@@ -85,6 +75,10 @@ span {
     height: 40px;
     background-color: #F3F4F4;
     padding-bottom: 20px;
+}
+
+.navbar button {
+    font-size: 18px;
 }
 
 .nav-link {
@@ -137,7 +131,6 @@ input[type=password] {
     box-sizing: border-box;
 }
 
-
 /* Extra styles for the cancel button */
 
 .cancelbtn {
@@ -169,18 +162,6 @@ img.avatar {
     text-align: center;
 }
 
-/*
-.json-temp {
-    display: flex;
-    text-align: left;
-}
-
-.json-temp .input-vars{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-*/
 .cancel-container {
     padding: 16px;
 }

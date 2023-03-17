@@ -15,7 +15,7 @@
   </div>
   <div class="model-form">
       <div class="row">
-          <form name="pred-form" action="#" id="prediction-form" method="POST">
+          <form name="pred-form" action="" id="prediction-form" method="POST" onsubmit="setInputs()">
               <div class="column">
                   <label for="gdp">GDP of Year (in trillions USD):</label><br />
                   <input type="field" id="gdp-year" name="gdp-year" value="1.53" /><br /><br />
@@ -170,12 +170,12 @@
                       <option value="Red">Red</option>
                   </select>
               </div>
-              <input type="submit" value="Generate"/>
-              
+              <input type="submit" value="Generate" onsubmit="setInputs()"/>
           </form>
           <br>
-          <button type="submit" id="testbut" onclick="document.getElementById('id02').style.display='block'">See Results</button>
-          <button type="submit" onclick="location.href='/'">Log Out</button>
+          <button type="submit" id="testbut" onclick="loadInputs()">See Results</button>
+          <button type="submit" id="clearbut" onclick="clearForm()">Clear Inputs</button>
+          
       </div>
   </div>
 
@@ -192,17 +192,65 @@
         </h2>
         <p>Based on your inputs of:</p>
         <div class="json-temp">
-          <p>
-            {{test}}
-          </p>
+          <ul class="input-vars" id="input-vars" onsubmit="loadInputs()">
+            <li id="gdp-text"></li>
+            <li id="inflation-text"></li>
+            <li id="pandemic-text"></li>
+            <li id="month-text"></li>
+            <li id="age-text"></li>
+            <li id="day-text"></li>
+            <li id="holiday-text"></li>
+            <li id="time-text"></li>
+            <li id="weather-text"></li>
+            <li id="facilities-text"></li>
+            <li id="beds-text"></li>
+            <li id="pop-text"></li>
+            <li id="injury-text"></li>
+            <li id="injuryzone-text"></li>
+          </ul>
         </div>
         <br/>
       </div>
     </form>
   </div>
   <script>
+    function setInputs() {
+      const form = document.getElementById('prediction-form');
+      const formData = new FormData(form);
+      var modalInputs = document.getElementById('input-vars');
+      var obj = JSON.parse(JSON.stringify(Object.fromEntries(formData.entries())));
+      var arr = [];
+      for(var i in obj)
+        arr.push(obj[i]);
+
+      localStorage.setItem("inputs", arr)
+    }
+
+    function loadInputs() {
+      document.getElementById('id02').style.display='block'
+
+      console.log(localStorage.getItem("inputs"))
+      var modalInputs = document.getElementById('input-vars');
+      var inputsList = "";
+      var inputSplit = localStorage.getItem("inputs").split(",")
+      console.log(inputSplit)
+      document.getElementById('gdp-text').innerHTML = "<em>" + "GDP: " + "</em>" + inputSplit[0]
+      document.getElementById('inflation-text').innerHTML = "<em>" + "Inflation: " + "</em>" + inputSplit[1] + " %"
+      document.getElementById('pandemic-text').innerHTML = "<em>" + "Pandemic: " + "</em>" + inputSplit[2]
+      document.getElementById('month-text').innerHTML = "<em>" + "Month: " + "</em>" + inputSplit[3]
+      document.getElementById('age-text').innerHTML = "<em>" + "Average Age of Province: " + "</em>" + inputSplit[4]
+      document.getElementById('day-text').innerHTML = "<em>" + "Day of the Week: " + "</em>" + inputSplit[5]
+      document.getElementById('holiday-text').innerHTML = "<em>" + "Holiday: " + "</em>" + inputSplit[6]
+      document.getElementById('time-text').innerHTML = "<em>" + "Time of Day: " + "</em>" + inputSplit[7]
+      document.getElementById('weather-text').innerHTML = "<em>" + "Weather: " + "</em>" + inputSplit[8]
+      document.getElementById('facilities-text').innerHTML ="<em>" +  "Facilities Within 50 KM Radius: " + "</em>" + inputSplit[9]
+      document.getElementById('beds-text').innerHTML = "<em>" + "Beds Available Per 1000 People: " + "</em>" + inputSplit[10]
+      document.getElementById('pop-text').innerHTML = "<em>" + "Population Density Per Sq KM: " + "</em>" + inputSplit[11]
+      document.getElementById('injury-text').innerHTML = "<em>" + "Injury Type: " + "</em>" + inputSplit[12]
+      document.getElementById('injuryzone-text').innerHTML = "<em>" + "Injury Zone: " + "</em>" + inputSplit[13]
+    }
+
     function submitForm() {
-      console.log("testing")
       document.forms['prediction-form'].submit(); // Submit the form
       document.forms['prediction-form'].reset();  // Reset all form data
     }
@@ -218,7 +266,7 @@
       document.getElementById('beds-avail').value = "";
       document.getElementById('pop-density').value = "";
       document.getElementById('holiday').value = "Christmas Day";
-      document.getElementById('injury-zone').value = "green";
+      document.getElementById('injury-zone').value = "Green";
       document.getElementById('time').value = "Early Morning";
     }
   </script>

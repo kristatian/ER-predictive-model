@@ -77,16 +77,16 @@ span {
     padding-bottom: 20px;
 }
 
-.navbar button {
-    font-size: 18px;
-}
-
 .nav-link {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     width: 100%;
+}
+
+.nav-link button {
+    font-size: 18px;
 }
 
 .navbar a {
@@ -131,6 +131,7 @@ input[type=password] {
     box-sizing: border-box;
 }
 
+
 /* Extra styles for the cancel button */
 
 .cancelbtn {
@@ -162,6 +163,18 @@ img.avatar {
     text-align: center;
 }
 
+/*
+.json-temp {
+    display: flex;
+    text-align: left;
+}
+
+.json-temp .input-vars{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+*/
 .cancel-container {
     padding: 16px;
 }
@@ -219,7 +232,6 @@ span.psw {
     padding-top: 60px;
 }
 
-
 /* Sign-in Modal Content/Box */
 
 .modal-content {
@@ -243,7 +255,6 @@ span.psw {
     /* Could be more or less, depending on screen size */
 }
 
-
 /* The Close Button (x) */
 
 .close {
@@ -261,7 +272,13 @@ span.psw {
     cursor: pointer;
 }
 
+input {
+    font-family: Montserrat;
+}
 
+select {
+    font-family: Montserrat;
+}
 /* help page contact form */
 
 input[type=text],
@@ -285,14 +302,10 @@ select {
     font-family: Montserrat;
 }
 
-button {
-    font-family: Montserrat;
-}
-
 input[type=submit] {
     background-color: #04AA6D;
     color: white;
-    padding: 12px 20px;
+    padding: 16px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -305,6 +318,7 @@ button {
     border: #070D29;
     border-radius: 4px;
     cursor: pointer;
+    font-family: Montserrat;
 }
 
 input[type=submit]:hover {

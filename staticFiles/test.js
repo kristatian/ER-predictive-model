@@ -10,7 +10,7 @@ function setScenario(scenario) {
     console.log("initializing scenario");
   }
   localStorage.setItem("scenario", scenario);
-  console.log(scenario);
+  console.log("scenario: " + scenario);
   loadText();
 }
 
@@ -118,6 +118,7 @@ function loadText() {
       zone.value = myArr["injury-zone"];
       
       localStorage.setItem("scenario", "{}");
+      //location.reload();
     }
 }
 

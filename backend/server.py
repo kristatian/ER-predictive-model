@@ -121,9 +121,11 @@ def delete_scenario(user_id, scenario_id):
 
 def retrieve_scenarios(user_id):
     sql = "SELECT * FROM what_if_scenario WHERE user_id = '%s' AND archived = 0" % (user_id)
+    cursor = db.cursor(dictionary=True)
     cursor.execute(sql) #make global
     result = cursor.fetchall()
     print(result)
+    cursor = db.cursor(dictionary=False)
     return result
 
 def retrieve_current_scenario_number(user_id, scenario_id):

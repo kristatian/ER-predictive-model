@@ -100,6 +100,7 @@
                   
                   <label for="weather">Weather:</label><br />
                   <select id="weather" name="weather" required>
+                    <option value="Sunny">Sunny</option>
                     <option value="Foggy">Foggy</option>
                     <option value="Ice Snow">Ice Snow</option>
                     <option value="Rainy">Rainy</option>
@@ -275,6 +276,7 @@
     }
     function displayResults() {
       if ("{{ displayResult }}" == "True") {
+        loadInputs()
         document.getElementById('id02').style.display='block';
       }
       loadText()

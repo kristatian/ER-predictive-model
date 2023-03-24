@@ -6,13 +6,12 @@ import copy
 
 # creates instance of Flask app
 app = Flask(__name__, template_folder='templates', static_folder='staticFiles')
-app.secret_key = "wetestingouthere"
-data_string = '''
+data_string = ''' 
 { 
     "prediction": "40", 
     "date": "Jan 24, 2023",
     "time": "12:23:45 AM EST"
-}
+} 
 '''  
 session = requests.Session()
 data = json.loads(data_string)
@@ -23,7 +22,7 @@ baseUrl = 'http://127.0.0.1:5000/'
 
 # valid weather mapping
 validWeather = ['Foggy', 'Ice Snow', 'Rainy', 'Snowy', 'Windy']
-
+injuryList = ['Stroke','Cardiac Arrest','Drug Overdose','Heart Attack','Active Seizure']
 
 @app.route("/", methods=['GET', 'POST']) 
 def appStart():
@@ -31,9 +30,6 @@ def appStart():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    #session['loggedin'] = True
-    #print("Session = ")
-    #print(session)
     if('username' in request.form):
         # call login function 
         response = requests.post(baseUrl+"/user/login",json={'username':request.form.get('username'),'password':sha256(request.form.get('psw').encode('utf-8')).hexdigest()},cookies={'session':request.cookies.get("session")})
@@ -55,8 +51,6 @@ def login():
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signin():
-    #print("Session = ")
-    #print(session)
     # check if signin or login
     if ('fname' in request.form):
         # call sign in function and display signup page again
@@ -68,7 +62,7 @@ def signin():
             print("Successful register")
         # if possible display a fail/success message...
     return render_template("signup.html")
-
+ 
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():
     response = requests.get(baseUrl+"/user/logout",cookies={'session':request.cookies.get("session")})
@@ -79,6 +73,7 @@ def logout():
     else:
         resp.set_cookie('session', '',expires=0)
 
+    resp.set_cookie('scenarioId', '',expires=0)
     print("return to signup.html")
     
     return resp
@@ -130,6 +125,9 @@ def home():
         if('Abdominal Pain' in injuryType):
             del toJSON[injuryType]
         
+        if (injuryType in injuryList):
+            toJSON['Injury Zone'] = "Red"
+
         print(toJSON)
 
         scenarioId = request.cookies.get("scenarioId")
@@ -148,8 +146,6 @@ def home():
         # check if session exists
         if(request.cookies.get("session") is None):
             return render_template("signup.html")
-    
-
     return render_template("index.html")
 
 @app.route("/api", methods=['GET', 'POST'])
@@ -166,6 +162,30 @@ def getJSON():
     ]
 
     return predResult
+
+# Create new what if scenario
+# backend endpoint = /scenario/store-scenario
+@app.route("/whatIfCreate", methods=['POST'])
+def createScenario():
+    # need some kind of button/call from frontend to do more here, dont really know how its going to be called
+    return 
+
+# get all user what if scenarios
+# backend endpoint = /scenario/get-scenarios
+@app.route("/whatIfGet", methods=['GET'])
+def getScenario():
+    response = requests.get(baseUrl+"/scenario/get-scenarios",cookies={'session':request.cookies.get("session")})
+    # need some kind of button/call from frontend to do more here
+    return response
+
+# get user prediction history
+# backend endpoint = /history/get-history
+@app.route("/getHistory", methods=['GET'])
+def getHistory():
+    response = requests.get(baseUrl+"/history/get-history",cookies={'session':request.cookies.get("session")})
+    # need some kind of button/call from frontend to do more here
+    return response
+
 
 @app.route("/info.html")
 def info():

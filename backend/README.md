@@ -1,8 +1,6 @@
 
 **MODEL DOESN'T WORK UNLESS YOU DOWNLOAD THE ZIP FROM GOOGLE DRIVE AND REPLACE THE SAVED_MODELS FOLDER**
 
-**Run "docker run <image_name>"**
-
 # Running the Backend and Database Using Docker and Github
 **Install Docker cli/desktop**
 

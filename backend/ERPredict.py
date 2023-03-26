@@ -5,7 +5,7 @@ from flask import session
 import runModel
 
 ##Prediction Generation
-def generate_prediction(username, input_vars, scenario_id):
+def generate_prediction(username, input_vars, scenario_id, prediction_name):
     model = 1
     user_id = server.retrieve_user_id(username)
     if (user_id is None):
@@ -18,8 +18,11 @@ def generate_prediction(username, input_vars, scenario_id):
     if scenario_id is None:
         scenario_id = server.retrieve_default_scenario_id(user_id)
 
+    if prediction_name is None:
+        prediction_name = server.retrieve_scenario_name(user_id, scenario_id) + " default name"
+
     scenario_number = server.retrieve_current_scenario_number(user_id, scenario_id)
-    server.store_prediction(user_id, input_vars, scenario_id, prediction, scenario_number)
+    server.store_prediction(user_id, input_vars, scenario_id, prediction, scenario_number, prediction_name)
     return prediction
 
 ##User

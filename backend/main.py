@@ -13,9 +13,10 @@ def generate_prediction():
     if 'loggedin' in session:
         username = request.headers.get('username')
         scenario_id = request.headers.get('scenario_id')
+        prediction_name = request.headers.get('prediction_name')
         #model = request.headers.get('model')
         request_body = request.get_json()
-        return ERPredict.generate_prediction(username, request_body,scenario_id) #return everything
+        return ERPredict.generate_prediction(username, request_body,scenario_id, prediction_name) #return everything
     return "Not Logged in"
 
 #User

@@ -34,6 +34,7 @@ CREATE TABLE prediction(
     user_id VARCHAR(36) NOT NULL,
     input_vars JSON NOT NULL,
     prediction VARCHAR(255),
+    prediction_name VARCHAR(255) NOT NULL,
     date_time TIMESTAMP,
     scenario_version_number INTEGER,
     PRIMARY KEY (request_id),

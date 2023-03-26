@@ -60,11 +60,11 @@ def verify_user_creds(username, password):
     return result
       
 #Prediction History Functions
-def store_prediction(user_id, input_vars, scenario_id, prediction, scenario_version_number):
+def store_prediction(user_id, input_vars, scenario_id, prediction, scenario_version_number, prediction_name):
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     input_vars = json.dumps(input_vars)
-    sql = "INSERT INTO prediction (request_id, user_id, scenario_id, input_vars, prediction, date_time, scenario_version_number) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-    values = (str(uuid.uuid4()), user_id, scenario_id, input_vars,  prediction, timestamp, scenario_version_number)
+    sql = "INSERT INTO prediction (request_id, user_id, scenario_id, input_vars, prediction, date_time, scenario_version_number, prediction_name) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+    values = (str(uuid.uuid4()), user_id, scenario_id, input_vars,  prediction, timestamp, scenario_version_number, prediction_name)
     cursor.execute(sql, values) #make global
     db.commit()
 
@@ -82,7 +82,7 @@ def delete_all_predictions(user_id):
     print(cursor.rowcount, "record(s) affected") 
 
 def retrieve_history(user_id): #THIS NEEDS WORK TO RETURN JSON STUFF PROPERLY
-    sql = "SELECT what_if_scenario_history.version_number, what_if_scenario_history.scenario_id, prediction.request_id, prediction.input_vars, prediction.prediction, prediction.date_time, what_if_scenario_history.scenario_name \
+    sql = "SELECT what_if_scenario_history.version_number, what_if_scenario_history.scenario_id, prediction.request_id, prediction.input_vars, prediction.prediction, prediction.date_time, what_if_scenario_history.scenario_name, prediction.prediction_name \
     FROM prediction, what_if_scenario_history \
     WHERE prediction.user_id = what_if_scenario_history.user_id AND prediction.user_id = '%s' AND what_if_scenario_history.version_number = prediction.scenario_version_number \
     AND prediction.scenario_id = what_if_scenario_history.scenario_id" % (user_id)
@@ -132,6 +132,15 @@ def retrieve_current_scenario_number(user_id, scenario_id):
     sql = "SELECT MAX(version_number) FROM what_if_scenario_history WHERE user_id = %s AND scenario_id = %s"
     values = (user_id, scenario_id)
     result = cursor.execute(sql, values) #make global
+    result = cursor.fetchone()
+    if result is not None:
+        result = functools.reduce(operator.add, result)
+    return result
+
+def retrieve_scenario_name(user_id, scenario_id):
+    sql = "SELECT scenario_name FROM what_if_scenario WHERE user_id = %s AND scenario_id= %s"
+    values = (user_id, scenario_id)
+    cursor.execute(sql, values)
     result = cursor.fetchone()
     if result is not None:
         result = functools.reduce(operator.add, result)

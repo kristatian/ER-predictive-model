@@ -38,6 +38,7 @@ CREATE TABLE `prediction` (
   `prediction` varchar(255) DEFAULT NULL,
   `date_time` timestamp NULL DEFAULT NULL,
   `scenario_version_number` int DEFAULT NULL,
+  `prediction_name` varchar(150) NOT NULL,
   PRIMARY KEY (`request_id`),
   UNIQUE KEY `request_id` (`request_id`),
   KEY `user_id` (`user_id`),

@@ -36,6 +36,7 @@ CREATE TABLE prediction(
     prediction VARCHAR(255),
     date_time TIMESTAMP,
     scenario_version_number INTEGER,
+    scenario_id VARCHAR(150) NOT NULL,
     PRIMARY KEY (request_id),
     FOREIGN KEY (scenario_id) REFERENCES what_if_scenario(scenario_id)
 );

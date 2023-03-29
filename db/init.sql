@@ -34,9 +34,9 @@ CREATE TABLE prediction(
     user_id VARCHAR(36) NOT NULL,
     input_vars JSON NOT NULL,
     prediction VARCHAR(255),
-    prediction_name VARCHAR(255) NOT NULL,
     date_time TIMESTAMP,
     scenario_version_number INTEGER,
+    prediction_name VARCHAR(255) NOT NULL,
     PRIMARY KEY (request_id),
     FOREIGN KEY (scenario_id) REFERENCES what_if_scenario(scenario_id)
 );

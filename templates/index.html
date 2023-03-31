@@ -4,6 +4,14 @@
   <div class="home-txt">
     <br>
     <h1>Prediction Form</h1><br>
+    <!--
+      <select id="what-if-scenarios">
+        <option value="option5">None</option>
+        <option id="testform1" onclick="setScenario(text1,1)" value="what-if-scenario">Midnight on Christmas Day</option>
+        <option value="option2">Evening of Halloween During Storm</option>
+        <option value="option3">Regular Snowy Day</option>
+        <option value="option4">Evening of New Year's Day</option>
+      </select>
       <div class="scenario-buttons">
         <button type="submit" id="testform1" onclick="setScenario(text1,1)">Midnight on Christmas Day</button>
         <button type="submit" id="testform2" onclick="setScenario(text2,2)">Evening of Halloween During Storm</button>
@@ -11,11 +19,14 @@
         <button type="submit" id="testform4" onclick="setScenario(text4,4)">Evening of New Year's Day</button>
         <button type="submit" id="testform5" onclick="setScenario(text5,5)">Regular Day In Pandemic</button>
       </div>
-      <br><br>
+      <br><br>-->
   </div>
   <div class="model-form">
       <div class="row">
           <form name="pred-form" action="index.html" id="prediction-form" method="POST" onsubmit="setInputs()">
+              <label for="scenario-name">Enter Name for Prediction:</label><br />
+              <input type="field" id="sname" name="sname" value="" required/><br /><br />
+              
               <div class="column">
                   <label for="gdp">GDP of Year (in trillions USD):</label><br />
                   <input type="field" id="gdp-year" name="gdp-year" value="1.53" required/><br /><br />
@@ -125,19 +136,19 @@
                   <br /><br />
                   
                   <label for="injury-type">Type of Injury:</label><br />
-                  <input type="radio" id="seizure" name="injury-type-ans" value="Active Seizure" checked/>
+                  <input type="radio" id="active-seizure" name="injury-type-ans" value="Active Seizure" checked/>
                   <label for="seizure">Active Seizure</label><br />
 
-                  <input type="radio" id="heart-atk" name="injury-type-ans" value="Heart Attack"/>
+                  <input type="radio" id="heart-attack" name="injury-type-ans" value="Heart Attack"/>
                   <label for="heart-atk">Heart Attack</label><br />
 
-                  <input type="radio" id="minor-cut" name="injury-type-ans" value="Minor Cuts"/>
+                  <input type="radio" id="minor-cuts" name="injury-type-ans" value="Minor Cuts"/>
                   <label for="minor-cut">Minor Cuts</label><br />
 
                   <input type="radio" id="minor-injury" name="injury-type-ans" value="Minor Injury"/>
                   <label for="minor-injury">Minor Injury</label><br />
 
-                  <input type="radio" id="overdose" name="injury-type-ans" value="Drug Overdose"/>
+                  <input type="radio" id="drug-overdose" name="injury-type-ans" value="Drug Overdose"/>
                   <label for="overdose">Drug Overdose</label><br />
 
                   <input type="radio" id="cardiac-arrest" name="injury-type-ans" value="Cardiac Arrest"/>
@@ -149,10 +160,10 @@
                   <input type="radio" id="flu" name="injury-type-ans" value="Flu"/>
                   <label for="flu">Flu</label><br />
 
-                  <input type="radio" id="Limb Fracture" name="injury-type-ans" value="Limb Fracture"/>
+                  <input type="radio" id="limb-fracture" name="injury-type-ans" value="Limb Fracture"/>
                   <label for="fracture">Limb Fracture</label><br />
 
-                  <input type="radio" id="mild-breathing" name="injury-type-ans" value="Mild Breathing difficulties"/>
+                  <input type="radio" id="mild-breathing-difficulties" name="injury-type-ans" value="Mild Breathing difficulties"/>
                   <label for="mild-breathing">Mild Breathing Difficulties</label><br />
 
                   <input type="radio" id="severe-pain" name="injury-type-ans" value="Severe Pain"/>
@@ -161,7 +172,7 @@
                   <input type="radio" id="sprain" name="injury-type-ans" value="Sprain"/>
                   <label for="sprain">Sprain</label><br />
 
-                  <input type="radio" id="Abdominal Pain" name="injury-type-ans" value="Abdominal Pain"/>
+                  <input type="radio" id="abdominal-pain" name="injury-type-ans" value="Abdominal Pain"/>
                   <label for="Abdominal-Pain">Abdominal Pain</label><br />
 
                   <input type="radio" id="stroke" name="injury-type-ans" value="Stroke"/>
@@ -173,11 +184,11 @@
                       <option value="Green">Green</option>
                       <option value="Yellow">Yellow</option>
                       <option value="Red">Red</option>
-                  </select>
+                  </select><br /><br />
               </div>
-              <input type="submit" value="Generate" onsubmit="setInputs()"/>
+              <input type="button" id="saveResults" value="Save As New Scenario"/>
+              <input type="submit" value="Generate Prediction" onsubmit="setInputs()"/>
           </form> <br>
-          <button type="submit" id="testbut" onclick="loadInputs()">See Results</button>
           <button type="submit" id="clearbut" onclick="clearForm()">Clear Inputs</button>
           <br>
       </div>
@@ -213,12 +224,20 @@
             <li id="injuryzone-text"></li>
           </ul>
         </div>
-        <br/>
-        <button>Save Results</button>
       </div>
     </form>
   </div>
+  
+
   <script>
+    document.getElementById("saveResults").addEventListener("click", function(e) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/whatIfCreate");
+      xhr.setRequestHeader("Content-Type", "application/json")
+      setInputs();
+      xhr.send(JSON.stringify({inputs: localStorage.getItem("inputsJSON")}));
+    });
+
     function setInputs() {
       const form = document.getElementById('prediction-form');
       const formData = new FormData(form);
@@ -229,29 +248,28 @@
         arr.push(obj[i]);
 
       localStorage.setItem("inputs", arr)
+      localStorage.setItem("inputsJSON", JSON.stringify(obj))
     }
 
     function loadInputs() {
       document.getElementById('id02').style.display='block'
 
-      console.log(localStorage.getItem("inputs"))
       var modalInputs = document.getElementById('input-vars');
       var inputSplit = localStorage.getItem("inputs").split(",")
-      console.log(inputSplit)
-      document.getElementById('gdp-text').innerHTML = "<em>" + "GDP: " + "</em>" + inputSplit[0]
-      document.getElementById('inflation-text').innerHTML = "<em>" + "Inflation: " + "</em>" + inputSplit[1] + " %"
-      document.getElementById('pandemic-text').innerHTML = "<em>" + "Pandemic: " + "</em>" + inputSplit[2]
-      document.getElementById('month-text').innerHTML = "<em>" + "Month: " + "</em>" + inputSplit[3]
-      document.getElementById('age-text').innerHTML = "<em>" + "Average Age of Province: " + "</em>" + inputSplit[4]
-      document.getElementById('day-text').innerHTML = "<em>" + "Day of the Week: " + "</em>" + inputSplit[5]
-      document.getElementById('holiday-text').innerHTML = "<em>" + "Holiday: " + "</em>" + inputSplit[6]
-      document.getElementById('time-text').innerHTML = "<em>" + "Time of Day: " + "</em>" + inputSplit[7]
-      document.getElementById('weather-text').innerHTML = "<em>" + "Weather: " + "</em>" + inputSplit[8]
-      document.getElementById('facilities-text').innerHTML ="<em>" +  "Facilities Within 50 KM Radius: " + "</em>" + inputSplit[9]
-      document.getElementById('beds-text').innerHTML = "<em>" + "Beds Available Per 1000 People: " + "</em>" + inputSplit[10]
-      document.getElementById('pop-text').innerHTML = "<em>" + "Population Density Per Sq KM: " + "</em>" + inputSplit[11]
-      document.getElementById('injury-text').innerHTML = "<em>" + "Injury Type: " + "</em>" + inputSplit[12]
-      document.getElementById('injuryzone-text').innerHTML = "<em>" + "Injury Zone: " + "</em>" + inputSplit[13]
+      document.getElementById('gdp-text').innerHTML = "<em>" + "GDP: " + "</em>" + inputSplit[1]
+      document.getElementById('inflation-text').innerHTML = "<em>" + "Inflation: " + "</em>" + inputSplit[2] + " %"
+      document.getElementById('pandemic-text').innerHTML = "<em>" + "Pandemic: " + "</em>" + inputSplit[3]
+      document.getElementById('month-text').innerHTML = "<em>" + "Month: " + "</em>" + inputSplit[4]
+      document.getElementById('age-text').innerHTML = "<em>" + "Average Age of Province: " + "</em>" + inputSplit[5]
+      document.getElementById('day-text').innerHTML = "<em>" + "Day of the Week: " + "</em>" + inputSplit[6]
+      document.getElementById('holiday-text').innerHTML = "<em>" + "Holiday: " + "</em>" + inputSplit[7]
+      document.getElementById('time-text').innerHTML = "<em>" + "Time of Day: " + "</em>" + inputSplit[8]
+      document.getElementById('weather-text').innerHTML = "<em>" + "Weather: " + "</em>" + inputSplit[9]
+      document.getElementById('facilities-text').innerHTML ="<em>" +  "Facilities Within 50 KM Radius: " + "</em>" + inputSplit[10]
+      document.getElementById('beds-text').innerHTML = "<em>" + "Beds Available Per 1000 People: " + "</em>" + inputSplit[11]
+      document.getElementById('pop-text').innerHTML = "<em>" + "Population Density Per Sq KM: " + "</em>" + inputSplit[12]
+      document.getElementById('injury-text').innerHTML = "<em>" + "Injury Type: " + "</em>" + inputSplit[13]
+      document.getElementById('injuryzone-text').innerHTML = "<em>" + "Injury Zone: " + "</em>" + inputSplit[14]
     }
 
     function submitForm() {
@@ -274,11 +292,13 @@
       document.getElementById('time').value = "";
       document.getElementById('day-of-wk').value = "";
     }
+    
     function displayResults() {
-      if ("{{ displayResult }}" == "True") {
+      if ("{{ displayResult }}" == 'True') {
         loadInputs()
         document.getElementById('id02').style.display='block';
       }
+      
       loadText()
     }
   </script>

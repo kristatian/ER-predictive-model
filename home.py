@@ -6,16 +6,6 @@ import copy
 
 # creates instance of Flask app
 app = Flask(__name__, template_folder='templates', static_folder='staticFiles')
-data_string = ''' 
-{ 
-    "prediction": "40", 
-    "date": "Jan 24, 2023",
-    "time": "12:23:45 AM EST"
-} 
-'''  
-session = requests.Session()
-data = json.loads(data_string)
-print(data['prediction']) 
 
 # change to actual address once hosting is done, this is for debugging only
 baseUrl = 'http://127.0.0.1:5000/'
@@ -40,7 +30,7 @@ def login():
         if('Success' in str(response.content)):
             # move to index.html and store username as cookie
             print('login success')
-            resp = make_response(render_template("index.html"))
+            resp = make_response(render_template("index.html", test = "", pred = "", displayResult = 'False'))
             #resp = make_response()
             resp.set_cookie('userID', request.form.get('username'))
             resp.set_cookie('session', response.cookies['session'])
@@ -54,7 +44,7 @@ def signin():
     # check if signin or login
     if ('fname' in request.form):
         # call sign in function and display signup page again
-        print("signup") 
+        print("signup")
         #/user/register
         response = requests.post(baseUrl+"/user/register",json={'username':request.form.get('fname'),'password':sha256(request.form.get('psw').encode('utf-8')).hexdigest()},cookies={'session':request.cookies.get("session")})
         #print(response.content)
@@ -133,8 +123,9 @@ def home():
         scenarioId = request.cookies.get("scenarioId")
         userName = request.cookies.get("userID")
 
+        predictionName = request.form['sname']
         #headers = {'scenario_id': scenarioId,'username':userName}
-        headers = {'username':userName}
+        headers = {'username':userName, 'prediction_name':predictionName, 'scenario_id': scenarioId}
  
         print(toJSON) 
         # run api call to backend api
@@ -142,7 +133,7 @@ def home():
         stringPrediction = response.content.decode("utf-8")
         print(stringPrediction)
         return render_template("index.html", test = sentJson, pred = stringPrediction, displayResult = 'True')
-    else:   
+    else:
         # check if session exists
         if(request.cookies.get("session") is None):
             return render_template("signup.html")
@@ -167,24 +158,82 @@ def getJSON():
 # backend endpoint = /scenario/store-scenario
 @app.route("/whatIfCreate", methods=['POST'])
 def createScenario():
-    # need some kind of button/call from frontend to do more here, dont really know how its going to be called
-    return 
+
+    inputs = json.loads(request.get_json().get("inputs"))
+    userName = request.cookies.get("userID")
+
+    scenarioName = inputs['sname']
+    headers = {'username':userName, 'scenario_name':scenarioName}
+
+    gdp = inputs['gdp-year']
+    inflationRate = inputs['inflation-rate']
+    pandemic = inputs['pandemic-ans']
+    month = inputs['month']
+    avgAge = inputs['average-age']
+    dayOfWeek = inputs['day-of-wk']
+    holiday = inputs['holiday']
+    timeOfDay = inputs['time']
+    weather = inputs['weather']
+    facilities = inputs['num-facilities']
+    bedsAvailable = inputs['beds-avail']
+    popDensity = inputs['pop-density']
+    injuryType = inputs['injury-type-ans']
+    injuryZone = inputs['injury-zone']
+    
+    toSend =  {'GDP of the year (in trillion USD)': gdp, 
+                'Inflation Rate': inflationRate, 
+                'Pandemic': pandemic, 
+                'Month': month,
+                'Average Age of province': avgAge,
+                'Day of the week': dayOfWeek, 
+                holiday: 1, 
+                timeOfDay: 1, 
+                weather: 1, 
+                'number of Health care facilities in a 50km radius': facilities,
+                'Hospital Beds per 1000 people': bedsAvailable, 
+                'Population Density /square km (Hospital Location Marker)': popDensity, 
+                injuryType: 1,
+                'Injury Zone': injuryZone}
+
+    print(toSend)
+
+    sentJson = copy.deepcopy(toSend)
+    
+    # quick json pre-processing 
+    if(not weather in validWeather):
+        del toSend[weather]
+
+    if ('None' in holiday):
+        del toSend[holiday]
+
+    if('Early Afternoon' in timeOfDay):
+        del toSend[timeOfDay]
+
+    if('Abdominal Pain' in injuryType):
+        del toSend[injuryType]
+
+    if (injuryType in injuryList):
+        toSend['Injury Zone'] = "Red"
+
+    requests.post(baseUrl+"/scenario/store-scenario",json=toSend,headers=headers,cookies={'session':request.cookies.get("session")})
+
+    return render_template("index.html")
 
 # get all user what if scenarios
 # backend endpoint = /scenario/get-scenarios
 @app.route("/whatIfGet", methods=['GET'])
 def getScenario():
     response = requests.get(baseUrl+"/scenario/get-scenarios",cookies={'session':request.cookies.get("session")})
-    # need some kind of button/call from frontend to do more here
-    return response
+    print(response.content.decode("utf-8"))
+    return response.content.decode("utf-8")
 
 # get user prediction history
 # backend endpoint = /history/get-history
 @app.route("/getHistory", methods=['GET'])
 def getHistory():
     response = requests.get(baseUrl+"/history/get-history",cookies={'session':request.cookies.get("session")})
-    # need some kind of button/call from frontend to do more here
-    return response
+    print(response.content.decode("utf-8"))
+    return response.content.decode("utf-8")
 
 
 @app.route("/info.html")
@@ -205,4 +254,3 @@ def history():
 # running app
 if __name__ == "__main__":
     app.run(debug=True,port=5002)
- 

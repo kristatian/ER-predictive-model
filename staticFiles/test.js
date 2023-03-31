@@ -5,14 +5,12 @@ const text4 = '{"gdp-year": "3", "inflation-rate": "7.45", "pandemic-ans": "Yes"
 const text5 = '{"gdp-year": "0.5", "inflation-rate": "0.5", "pandemic-ans": "Yes", "month": "September", "average-age": "90", "day-of-wk": "Friday", "None" : "1", "Past Midnight" : "1", "weather": "Rainy", "num-facilities": "1","beds-avail": "7", "pop-density": "7", "Drug Overdose" : "1", "injury-zone": "Green"}';
 
 
-function setScenario(scenario,scenarioId) {
+function setScenario(scenario, scenarioId) {
   if (localStorage.getItem("scenario") == null) {
     localStorage.setItem("scenario", "{}");
-    console.log("initializing scenario");
   }
   localStorage.setItem("scenario", scenario);
 
-  console.log("scenario: " + scenario);
   document.cookie = "scenarioId=" + scenarioId;
   loadText();
 }
@@ -29,103 +27,80 @@ function loadText() {
     for (key in myArr) {
       keysArr.push(key);
     }
-
-    console.log(keysArr)
+    
     if (!(Object.keys(myArr).length === 0)) {
+
+      const hol = document.getElementById('holiday');
+      const timeOfDay = document.getElementById('time');
+      const weather = document.getElementById('weather');
+
+      holList = ["Christmas Day", "New Year's Eve", "New Year's Day", "Black Friday", "Labor Day", "Easter Sunday", "Halloween", "Canada Day", "Thanksgiving", "Victoria Day", "Valentine's Day", "Super bowl", "St. Patrick's Day"];
+      timeList = ["Early Morning", "Early Afternoon", "Early Evening", "Late Morning", "Late Afternoon", "Late Evening", "Past Midnight"];
+      injuryList = ["Active Seizure", "Heart Attack", "Minor Cuts", "Minor Injury", "Drug Overdose", "Cardiac Arrest", "Dislocation", "Flu", "Limb Fracture", "Mild Breathing Difficulties", "Severe Pain", "Sprain", "Abdominal Pain", "Stroke"];
+      weatherList = ["Sunny", "Foggy", "Ice Snow", "Rainy", "Snowy", "Windy"];
+
+      keysArr.forEach(key => {
+        if (holList.includes(key)) {
+          hol.value = key;
+        }
+
+        if (timeList.includes(key)) {
+          timeOfDay.value = key;
+        }
+
+        if (weatherList.includes(key)) {
+          weather.value = key;
+        }
+
+        if (injuryList.includes(key)) {
+          const injuryType = document.getElementById(key.toLowerCase().replace(" ", "-"));
+          injuryType.checked = true;
+        }
+      })
+
       const gdp = document.getElementById('gdp-year');
-      gdp.value = myArr["gdp-year"];
+      gdp.value = myArr["GDP of the year (in trillion USD)"];
 
       const inf = document.getElementById('inflation-rate');
-      inf.value = myArr["inflation-rate"];
+      inf.value = myArr["Inflation Rate"];
 
       const panedmicY = document.getElementById('pandemic-yes');
       const panedmicN = document.getElementById('pandemic-no');
 
-      if (myArr["pandemic-ans"] == 'Yes') {
+      if (myArr["Pandemic"] == 'Yes') {
         panedmicY.checked = true;
       } else {
         panedmicN.checked = true;
       }
 
       const month = document.getElementById('month');
-      month.value = myArr["month"];
+      month.value = myArr["Month"];
 
       const avgAge = document.getElementById('average-age');
-      avgAge.value = myArr["average-age"];
+      avgAge.value = myArr["Average Age of province"];
 
       const day = document.getElementById('day-of-wk');
-      day.value = myArr["day-of-wk"];
-
-      const hol = document.getElementById('holiday');
-      hol.value = keysArr[6];
-      
-
-      const timeOfDay = document.getElementById('time');
-      timeOfDay.value = keysArr[7];
-
-      const weather = document.getElementById('weather');
-      weather.value = myArr["weather"];
+      day.value = myArr["Day of the week"];
 
       const facilities = document.getElementById('num-facilities');
-      facilities.value = myArr["num-facilities"];
+      facilities.value = myArr["number of Health care facilities in a 50km radius"];
 
       const beds = document.getElementById('beds-avail');
-      beds.value = myArr["beds-avail"];
+      beds.value = myArr["Hospital Beds per 1000 people"];
 
       const popDensity = document.getElementById('pop-density');
-      popDensity.value = myArr["pop-density"];
-      
-      const itSeizure = document.getElementById('seizure');
-      const itHeartAtk = document.getElementById('heart-atk');
-      const itMinorCut = document.getElementById('minor-cut');
-      const itMinorInjury = document.getElementById('minor-injury');
-      const itOverdose = document.getElementById('overdose');
-      const itCardiacArrest = document.getElementById('cardiac-arrest');
-      const itDislocation = document.getElementById('dislocation');
-      const itFlu = document.getElementById('flu');
-      const itFracture = document.getElementById('fracture');
-      const itMildBreathing = document.getElementById('mild-breathing');
-      const itSeverePain = document.getElementById('severe-pain');
-      const itSprain = document.getElementById('sprain');
-      const itStroke = document.getElementById('stroke');
-
-      if (keysArr[12] == 'Active Seizure') {
-        itSeizure.checked = true;
-      } else if (keysArr[12] == 'Heart Attack') {
-        itHeartAtk.checked = true;
-      } else if (keysArr[12] == 'Minor Cuts') {
-        itMinorCut.checked = true;
-      } else if (keysArr[12] == 'Minor Injury') {
-        itMinorInjury.checked = true;
-      } else if (keysArr[12] == 'Drug Overdose') {
-        itOverdose.checked = true;
-      } else if (keysArr[12] == 'Cardiac Arrest') {
-        itCardiacArrest.checked = true;
-      } else if (keysArr[12] == 'Dislocation') {
-        itDislocation.checked = true;
-      } else if (keysArr[12] == 'Flu') {
-        itFlu.checked = true;
-      } else if (keysArr[12] == 'Fracture') {
-        itFracture.checked = true;
-      } else if (keysArr[12] == 'Mild Breathing Difficulties') {
-        itMildBreathing.checked = true;
-      } else if (keysArr[12] == 'Severe Pain') {
-        itSeverePain.checked = true;
-      } else if (keysArr[12] == 'Sprain') {
-        itSprain.checked = true;
-      } else if (keysArr[12] == 'Stroke') {
-        itStroke.checked = true;
-      }
+      popDensity.value = myArr["Population Density /square km (Hospital Location Marker)"];
 
       const zone = document.getElementById('injury-zone');
-      zone.value = myArr["injury-zone"];
+      zone.value = myArr["Injury Zone"];
       
       localStorage.setItem("scenario", "{}");
       //location.reload();
     }
 }
 
-document.getElementById('prediction-form').addEventListener('submit', function(e) {
+
+document.getElementById('saveResults').addEventListener('click', function(e) {
   if (localStorage.getItem("scenarios") == null) {
     localStorage.setItem("scenarios", "[]");
   }
@@ -148,20 +123,61 @@ document.getElementById('prediction-form').addEventListener('submit', function(e
   localStorage.setItem("scenarios", JSON.stringify(scenario_list));
 })
 
-function loadHistory() {
-
-  var historyList = document.getElementById('past-gens')
-  var scenarioList = JSON.parse(localStorage.getItem("scenarios"));
-
-  for (i = 0; i < scenarioList.length; i++) {
-    var li = document.createElement("a");
-    li.setAttribute('href', "index.html");
-    li.setAttribute('id', `${i}`);
-    li.onclick = function(e) {
-      var scenarioList = JSON.parse(localStorage.getItem("scenarios"));
-      setScenario(scenarioList[parseInt(e.target.id)]);
+function loadHistory(scenarioId) {
+  var xhr = new XMLHttpRequest();
+  
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      var historyList = document.getElementById(scenarioId);
+      var predictionList = JSON.parse(xhr.responseText);
+      
+      for (i = 0; i < predictionList.length; i++) {
+        if (predictionList[i]['scenario_id'] == scenarioId) {
+          var li = document.createElement("a");
+          li.setAttribute('href', "index.html");
+          li.setAttribute('id', `${predictionList[i]['scenario_id']}`);
+          li.innerHTML = predictionList[i]['prediction_name'] + " - " + predictionList[i]['prediction'] + " mins";
+          historyList.appendChild(li);
+        }
+        
+        li.onclick = function(e) {
+          for (i = 0; i < predictionList.length; i++) {
+            if (predictionList[i]['prediction_name'] == e.target.innerHTML) {
+              setScenario(predictionList[i]['input_vars'], e.target.id);
+            }
+          }
+        }
+      }
     }
-    li.innerHTML = "Saved Report " + (i + 1);
-    historyList.appendChild(li);
   }
+
+  xhr.open("GET", "/getHistory");
+  xhr.setRequestHeader("Content-Type", "application/json")
+  xhr.send();
+}
+
+function loadScenarios() {
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      var scenarioList = JSON.parse(xhr.responseText);
+
+      var historyList = document.getElementById('past-gens')
+
+      for (i = 0; i < scenarioList.length; i++) {
+        var li = document.createElement("li");
+        li.setAttribute('id', `${scenarioList[i]['scenario_id']}`);
+        li.onclick = function(e) {
+          loadHistory(e.target.id);
+        }
+        li.innerHTML = scenarioList[i]['scenario_name'];
+        historyList.appendChild(li);
+      }
+    }
+  }
+
+  xhr.open("GET", "/whatIfGet");
+  xhr.setRequestHeader("Content-Type", "application/json")
+  xhr.send();
 }

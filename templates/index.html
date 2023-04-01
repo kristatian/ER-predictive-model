@@ -1,0 +1,307 @@
+  {% extends "base.html" %} {% block content %}
+  <!-- INTRO AND FORM WITH FIELDS -->
+<body onload="displayResults()">
+  <div class="home-txt">
+    <br>
+    <h1>Prediction Form</h1><br>
+    <!--
+      <select id="what-if-scenarios">
+        <option value="option5">None</option>
+        <option id="testform1" onclick="setScenario(text1,1)" value="what-if-scenario">Midnight on Christmas Day</option>
+        <option value="option2">Evening of Halloween During Storm</option>
+        <option value="option3">Regular Snowy Day</option>
+        <option value="option4">Evening of New Year's Day</option>
+      </select>
+      <div class="scenario-buttons">
+        <button type="submit" id="testform1" onclick="setScenario(text1,1)">Midnight on Christmas Day</button>
+        <button type="submit" id="testform2" onclick="setScenario(text2,2)">Evening of Halloween During Storm</button>
+        <button type="submit" id="testform3" onclick="setScenario(text3,3)">Regular Snowy Day</button>
+        <button type="submit" id="testform4" onclick="setScenario(text4,4)">Evening of New Year's Day</button>
+        <button type="submit" id="testform5" onclick="setScenario(text5,5)">Regular Day In Pandemic</button>
+      </div>
+      <br><br>-->
+  </div>
+  <div class="model-form">
+      <div class="row">
+          <form name="pred-form" action="index.html" id="prediction-form" method="POST" onsubmit="setInputs()">
+              <label for="scenario-name">Enter Name for Prediction:</label><br />
+              <input type="field" id="sname" name="sname" value="" required/><br /><br />
+              
+              <div class="column">
+                  <label for="gdp">GDP of Year (in trillions USD):</label><br />
+                  <input type="field" id="gdp-year" name="gdp-year" value="1.53" required/><br /><br />
+                  <label for="inflation">Inflation Rate:</label><br />
+                  <input type="field" id="inflation-rate" name="inflation-rate" value="1.43" required/><br /><br />
+
+                  <label for="pandemic">Pandemic:</label><br />
+                  <!-- put check box y/n -->
+                  <input type="radio" id="pandemic-yes" name="pandemic-ans" value="Yes" checked/>
+                  <label for="pandemic-yes">Yes</label><br />
+                  <input type="radio" id="pandemic-no" name="pandemic-ans" value="No" />
+                  <label for="pandemic-no">No</label><br /><br />
+
+                  <label for="month">Month:</label><br />
+                  <!-- dropdown option -->
+                  <select id="month" name="month" required>
+                      <option value="January">January</option>
+                      <option value="February">February</option>
+                      <option value="March">March</option>
+                      <option value="April">April</option>
+                      <option value="May">May</option>
+                      <option value="June">June</option>
+                      <option value="July">July</option>
+                      <option value="August">August</option>
+                      <option value="September">September</option>
+                      <option value="October">October</option>
+                      <option value="November">November</option>
+                      <option value="December">December</option>
+                  </select>
+                  <br /><br />
+
+                  <label for="age">Average Age of Province:</label><br />
+                  <input type="field" id="average-age" name="average-age" value="34" required/><br /><br />
+              </div>
+
+              <div class="column">
+                  <label for="day-of-wk">Day of the Week:</label><br />
+                  <!-- dropdown option -->
+                  <select id="day-of-wk" name="day-of-wk" required>
+                      <option value="Monday">Monday</option>
+                      <option value="Tuesday">Tuesday</option>
+                      <option value="Wednesday">Wednesday</option>
+                      <option value="Thursday">Thursday</option>
+                      <option value="Friday">Friday</option>
+                      <option value="Saturday">Saturday</option>
+                      <option value="Sunday">Sunday</option>
+                  </select>
+                  <br /><br />
+
+                  <label for="holiday">Holiday:</label><br />
+                  <!-- dropdown option -->
+                  <select id="holiday" name="holiday" required>
+                      <option value="None">None</option>
+                      <option value="Christmas Day">Christmas Day</option>
+                      <option value="New Year's Eve">New Year's Eve</option>
+                      <option value="New Year's Day">New Year's Day</option>
+                      <option value="Black Friday">Black Friday</option>
+                      <option value="Labor Day">Labor Day</option>
+                      <option value="Easter Sunday">Easter Sunday</option>
+                      <option value="Halloween">Halloween</option>
+                      <option value="Canada Day">Canada Day</option>
+                      <option value="Thanksgiving">Thanksgiving</option>
+                      <option value="Victoria Day">Victoria Day</option>
+                      <option value="Valentine's Day">Valentine's Day</option>
+                      <option value="Super bowl">Super bowl</option>
+                      <option value="St. Patrick's Day">St. Patrick's Day</option>
+                  </select>
+                  <br /><br />
+
+                  <label for="time">Time of Day:</label><br />
+                  <!-- dropdown option -->
+                  <select id="time" name="time" required>
+                      <option value="Early Morning">Early Morning</option>
+                      <option value="Early Afternoon">Early Afternoon</option>
+                      <option value="Early Evening">Early Evening</option>
+                      <option value="Late Morning">Late Morning</option>
+                      <option value="Late Afternoon">Late Afternoon</option>
+                      <option value="Late Evening">Late Evening</option>
+                      <option value="Past Midnight">Past Midnight</option>
+                  </select>
+                  <br /><br />
+                  
+                  <label for="weather">Weather:</label><br />
+                  <select id="weather" name="weather" required>
+                    <option value="Sunny">Sunny</option>
+                    <option value="Foggy">Foggy</option>
+                    <option value="Ice Snow">Ice Snow</option>
+                    <option value="Rainy">Rainy</option>
+                    <option value="Snowy">Snowy</option>
+                    <option value="Windy">Windy</option>
+                  </select>
+                  <br /><br />
+
+                  <label for="facilities">Healthcare Facilities Within 50km Radius:</label><br />
+                  <input type="field" id="num-facilities" name="num-facilities" value="3" required/><br /><br />
+
+              </div>
+
+              <div class="column">
+                  <label for="beds-avail">Beds Available (Per 1000 People):</label>
+                  <br />
+                  <input type="field" id="beds-avail" name="beds-avail" value="2.6" required/>
+                  <br /><br />
+                  <label for="pop-density">Population Density (Per Square Kilometer):</label>
+                  <br />
+                  <input type="field" id="pop-density" name="pop-density" value="2004.4" required/>
+                  <br /><br />
+                  
+                  <label for="injury-type">Type of Injury:</label><br />
+                  <input type="radio" id="active-seizure" name="injury-type-ans" value="Active Seizure" checked/>
+                  <label for="seizure">Active Seizure</label><br />
+
+                  <input type="radio" id="heart-attack" name="injury-type-ans" value="Heart Attack"/>
+                  <label for="heart-atk">Heart Attack</label><br />
+
+                  <input type="radio" id="minor-cuts" name="injury-type-ans" value="Minor Cuts"/>
+                  <label for="minor-cut">Minor Cuts</label><br />
+
+                  <input type="radio" id="minor-injury" name="injury-type-ans" value="Minor Injury"/>
+                  <label for="minor-injury">Minor Injury</label><br />
+
+                  <input type="radio" id="drug-overdose" name="injury-type-ans" value="Drug Overdose"/>
+                  <label for="overdose">Drug Overdose</label><br />
+
+                  <input type="radio" id="cardiac-arrest" name="injury-type-ans" value="Cardiac Arrest"/>
+                  <label for="cardiac-arrest">Cardiac Arrest</label><br />
+
+                  <input type="radio" id="dislocation" name="injury-type-ans" value="Dislocation"/>
+                  <label for="dislocation">Dislocation</label><br />
+
+                  <input type="radio" id="flu" name="injury-type-ans" value="Flu"/>
+                  <label for="flu">Flu</label><br />
+
+                  <input type="radio" id="limb-fracture" name="injury-type-ans" value="Limb Fracture"/>
+                  <label for="fracture">Limb Fracture</label><br />
+
+                  <input type="radio" id="mild-breathing-difficulties" name="injury-type-ans" value="Mild Breathing difficulties"/>
+                  <label for="mild-breathing">Mild Breathing Difficulties</label><br />
+
+                  <input type="radio" id="severe-pain" name="injury-type-ans" value="Severe Pain"/>
+                  <label for="severe-pain">Severe Pain</label><br />
+
+                  <input type="radio" id="sprain" name="injury-type-ans" value="Sprain"/>
+                  <label for="sprain">Sprain</label><br />
+
+                  <input type="radio" id="abdominal-pain" name="injury-type-ans" value="Abdominal Pain"/>
+                  <label for="Abdominal-Pain">Abdominal Pain</label><br />
+
+                  <input type="radio" id="stroke" name="injury-type-ans" value="Stroke"/>
+                  <label for="stroke">Stroke</label><br /><br />
+
+                  <label for="injury-zone">Injury Severity Zone:</label><br />
+                  <!-- dropdown option -->
+                  <select id="injury-zone" name="injury-zone" required>
+                      <option value="Green">Green</option>
+                      <option value="Yellow">Yellow</option>
+                      <option value="Red">Red</option>
+                  </select><br /><br />
+              </div>
+              <input type="button" id="saveResults" value="Save As New Scenario"/>
+              <input type="submit" value="Generate Prediction" onsubmit="setInputs()"/>
+          </form> <br>
+          <button type="submit" id="clearbut" onclick="clearForm()">Clear Inputs</button>
+          <br>
+      </div>
+  </div>
+
+  <div id="id02" class="prediction-modal">
+    <form class="modal-content-pred animate" action="" method="">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close">&times;</span>
+      </div>
+      <div class="prediction-container">
+        <h1>Results</h1>
+        <p>Predicted Wait Time:</p>
+        <h2>
+          {{pred}} mins
+        </h2>
+        <p>Based on your inputs of:</p>
+        <div class="json-temp">
+          <ul class="input-vars" id="input-vars" onsubmit="loadInputs()">
+            <li id="gdp-text"></li>
+            <li id="inflation-text"></li>
+            <li id="pandemic-text"></li>
+            <li id="month-text"></li>
+            <li id="age-text"></li>
+            <li id="day-text"></li>
+            <li id="holiday-text"></li>
+            <li id="time-text"></li>
+            <li id="weather-text"></li>
+            <li id="facilities-text"></li>
+            <li id="beds-text"></li>
+            <li id="pop-text"></li>
+            <li id="injury-text"></li>
+            <li id="injuryzone-text"></li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </div>
+  
+
+  <script>
+    document.getElementById("saveResults").addEventListener("click", function(e) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/whatIfCreate");
+      xhr.setRequestHeader("Content-Type", "application/json")
+      setInputs();
+      xhr.send(JSON.stringify({inputs: localStorage.getItem("inputsJSON")}));
+    });
+
+    function setInputs() {
+      const form = document.getElementById('prediction-form');
+      const formData = new FormData(form);
+      var modalInputs = document.getElementById('input-vars');
+      var obj = JSON.parse(JSON.stringify(Object.fromEntries(formData.entries())));
+      var arr = [];
+      for(var i in obj)
+        arr.push(obj[i]);
+
+      localStorage.setItem("inputs", arr)
+      localStorage.setItem("inputsJSON", JSON.stringify(obj))
+    }
+
+    function loadInputs() {
+      document.getElementById('id02').style.display='block'
+
+      var modalInputs = document.getElementById('input-vars');
+      var inputSplit = localStorage.getItem("inputs").split(",")
+      document.getElementById('gdp-text').innerHTML = "<em>" + "GDP: " + "</em>" + inputSplit[1]
+      document.getElementById('inflation-text').innerHTML = "<em>" + "Inflation: " + "</em>" + inputSplit[2] + " %"
+      document.getElementById('pandemic-text').innerHTML = "<em>" + "Pandemic: " + "</em>" + inputSplit[3]
+      document.getElementById('month-text').innerHTML = "<em>" + "Month: " + "</em>" + inputSplit[4]
+      document.getElementById('age-text').innerHTML = "<em>" + "Average Age of Province: " + "</em>" + inputSplit[5]
+      document.getElementById('day-text').innerHTML = "<em>" + "Day of the Week: " + "</em>" + inputSplit[6]
+      document.getElementById('holiday-text').innerHTML = "<em>" + "Holiday: " + "</em>" + inputSplit[7]
+      document.getElementById('time-text').innerHTML = "<em>" + "Time of Day: " + "</em>" + inputSplit[8]
+      document.getElementById('weather-text').innerHTML = "<em>" + "Weather: " + "</em>" + inputSplit[9]
+      document.getElementById('facilities-text').innerHTML ="<em>" +  "Facilities Within 50 KM Radius: " + "</em>" + inputSplit[10]
+      document.getElementById('beds-text').innerHTML = "<em>" + "Beds Available Per 1000 People: " + "</em>" + inputSplit[11]
+      document.getElementById('pop-text').innerHTML = "<em>" + "Population Density Per Sq KM: " + "</em>" + inputSplit[12]
+      document.getElementById('injury-text').innerHTML = "<em>" + "Injury Type: " + "</em>" + inputSplit[13]
+      document.getElementById('injuryzone-text').innerHTML = "<em>" + "Injury Zone: " + "</em>" + inputSplit[14]
+    }
+
+    function submitForm() {
+      document.forms['prediction-form'].submit(); // Submit the form
+      document.forms['prediction-form'].reset();  // Reset all form data
+    }
+
+    function clearForm() {
+      document.getElementById('gdp-year').value = "";
+      document.getElementById('inflation-rate').value = "";
+      document.getElementById('pandemic-no').checked = true;
+      document.getElementById('month').value = "";
+      document.getElementById('average-age').value = "";
+      document.getElementById('weather').value = "";
+      document.getElementById('num-facilities').value = "";
+      document.getElementById('beds-avail').value = "";
+      document.getElementById('pop-density').value = "";
+      document.getElementById('holiday').value = "";
+      document.getElementById('injury-zone').value = "";
+      document.getElementById('time').value = "";
+      document.getElementById('day-of-wk').value = "";
+    }
+    
+    function displayResults() {
+      if ("{{ displayResult }}" == 'True') {
+        loadInputs()
+        document.getElementById('id02').style.display='block';
+      }
+      
+      loadText()
+    }
+  </script>
+  <script type="text/javascript" src="../staticFiles/test.js"></script>
+</body>
+  {% endblock %}

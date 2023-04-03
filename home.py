@@ -223,9 +223,12 @@ def createScenario():
 # backend endpoint = /scenario/get-scenarios
 @app.route("/whatIfGet", methods=['GET'])
 def getScenario():
-    response = requests.get(baseUrl+"/scenario/get-scenarios",cookies={'session':request.cookies.get("session")})
-    print(response.content.decode("utf-8"))
-    return response.content.decode("utf-8")
+    responseScenario = requests.get(baseUrl+"/scenario/get-scenarios",cookies={'session':request.cookies.get("session")})
+    responsePrediction = requests.get(baseUrl+"/history/get-history",cookies={'session':request.cookies.get("session")})
+    # print(responseScenario.content.decode("utf-8"))
+    # print(responsePrediction.content.decode("utf-8"))
+    test = "[" + responseScenario.content.decode("utf-8") + "," + responsePrediction.content.decode("utf-8") + "]";
+    return test
 
 # get user prediction history
 # backend endpoint = /history/get-history
@@ -243,7 +246,7 @@ def info():
 
 @app.route("/help.html")
 def help():
-    return render_template("login.html")
+    return render_template("help.html")
 
 
 @app.route("/history.html", methods=['GET', 'POST'])

@@ -321,6 +321,15 @@ input[type=submit] {
     cursor: pointer;
 }
 
+input[type=button] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 button {
     background-color: #F3F4F4;
     color: #070D29;
@@ -437,4 +446,8 @@ input[type=submit]:hover {
 .home-txt h1{
     display: flex;
     justify-content: center;
+}
+
+.what-if-scenarios {
+    width: 20%;
 }

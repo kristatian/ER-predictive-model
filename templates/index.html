@@ -4,30 +4,17 @@
   <div class="home-txt">
     <br>
     <h1>Prediction Form</h1><br>
-    <!--
-      <select id="what-if-scenarios">
-        <option value="option5">None</option>
-        <option id="testform1" onclick="setScenario(text1,1)" value="what-if-scenario">Midnight on Christmas Day</option>
-        <option value="option2">Evening of Halloween During Storm</option>
-        <option value="option3">Regular Snowy Day</option>
-        <option value="option4">Evening of New Year's Day</option>
-      </select>
-      <div class="scenario-buttons">
-        <button type="submit" id="testform1" onclick="setScenario(text1,1)">Midnight on Christmas Day</button>
-        <button type="submit" id="testform2" onclick="setScenario(text2,2)">Evening of Halloween During Storm</button>
-        <button type="submit" id="testform3" onclick="setScenario(text3,3)">Regular Snowy Day</button>
-        <button type="submit" id="testform4" onclick="setScenario(text4,4)">Evening of New Year's Day</button>
-        <button type="submit" id="testform5" onclick="setScenario(text5,5)">Regular Day In Pandemic</button>
-      </div>
-      <br><br>-->
+    <select class="what-if-scenarios" id="what-if-scenarios">
+
+    </select>
+
   </div>
   <div class="model-form">
       <div class="row">
           <form name="pred-form" action="index.html" id="prediction-form" method="POST" onsubmit="setInputs()">
-              <label for="scenario-name">Enter Name for Prediction:</label><br />
-              <input type="field" id="sname" name="sname" value="" required/><br /><br />
-              
               <div class="column">
+                  <label for="scenario-name">Enter Name for Prediction:</label><br />
+                  <input type="field" id="sname" name="sname" value="" required/><br /><br />
                   <label for="gdp">GDP of Year (in trillions USD):</label><br />
                   <input type="field" id="gdp-year" name="gdp-year" value="1.53" required/><br /><br />
                   <label for="inflation">Inflation Rate:</label><br />
@@ -207,7 +194,7 @@
         </h2>
         <p>Based on your inputs of:</p>
         <div class="json-temp">
-          <ul class="input-vars" id="input-vars" onsubmit="loadInputs()">
+          <ul class="input-vars" id="input-vars">
             <li id="gdp-text"></li>
             <li id="inflation-text"></li>
             <li id="pandemic-text"></li>
@@ -228,7 +215,6 @@
     </form>
   </div>
   
-
   <script>
     document.getElementById("saveResults").addEventListener("click", function(e) {
       var xhr = new XMLHttpRequest();
@@ -236,6 +222,7 @@
       xhr.setRequestHeader("Content-Type", "application/json")
       setInputs();
       xhr.send(JSON.stringify({inputs: localStorage.getItem("inputsJSON")}));
+      window.location.reload();
     });
 
     function setInputs() {

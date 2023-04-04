@@ -36,6 +36,12 @@ def create_user():
 
 @app.route('/user/login', methods=['GET', 'POST'])
 def login():
+    if 'loggedin' in session:
+        session.pop('loggedin', None)
+    if 'id' in session:
+        session.pop('id', None)
+    if 'username' in session:
+        session.pop('username', None)
     if 'loggedin' not in session:
         if request.method == 'POST':
             request_body = request.get_json()

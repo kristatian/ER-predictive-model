@@ -16,32 +16,48 @@
                 <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close">&times;</span>
             </div>
             <div class="prediction-container">
-            <h1>Results</h1>
-            <p>Predicted Wait Time:</p>
-            <h2 id="pred-mins"></h2>
-            <p>Based on your inputs of:</p>
-            <div class="json-temp">
-                <ul class="input-vars" id="input-vars">
-                    <li id="gdp-text"></li>
-                    <li id="inflation-text"></li>
-                    <li id="pandemic-text"></li>
-                    <li id="month-text"></li>
-                    <li id="age-text"></li>
-                    <li id="day-text"></li>
-                    <li id="holiday-text"></li>
-                    <li id="time-text"></li>
-                    <li id="weather-text"></li>
-                    <li id="facilities-text"></li>
-                    <li id="beds-text"></li>
-                    <li id="pop-text"></li>
-                    <li id="injury-text"></li>
-                    <li id="injuryzone-text"></li>
-                </ul>
-            </div>
-            <p id="date-generated"></p>
+                <h1>Results</h1>
+                <p>Predicted Wait Time:</p>
+                <h2 id="pred-mins"></h2>
+                <p>Based on your inputs of:</p>
+                <div class="json-temp">
+                    <ul class="input-vars" id="input-vars">
+                        <li id="gdp-text"></li>
+                        <li id="inflation-text"></li>
+                        <li id="pandemic-text"></li>
+                        <li id="month-text"></li>
+                        <li id="age-text"></li>
+                        <li id="day-text"></li>
+                        <li id="holiday-text"></li>
+                        <li id="time-text"></li>
+                        <li id="weather-text"></li>
+                        <li id="facilities-text"></li>
+                        <li id="beds-text"></li>
+                        <li id="pop-text"></li>
+                        <li id="injury-text"></li>
+                        <li id="injuryzone-text"></li>
+                    </ul>
+                </div>
+                <p id="date-generated"></p>
             </div>
             <div class="button-container">
                 <button id="load-inputs" onclick="loadPrediction()">Load Inputs</button>
+                <button type="button" id="delete-pred" onclick="deletePrediction()">Delete Prediction</button>
+            </div>
+            <br>
+        </form>
+    </div>
+
+    <div id="id05" class="prediction-modal">
+        <form class="modal-content-pred animate" id="modal-form" action="index.html" method="">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id05').style.display='none'" class="close" title="Close">&times;</span>
+            </div>
+            <div class="prediction-container">
+                <div class="button-container">
+                    <button id="load-scenario" onclick="loadPrediction()">Load Scenario</button>
+                    <button type="button" id="delete-scenario" onclick="deleteScenario()">Delete Scenario</button>
+                </div>
             </div>
             <br>
         </form>

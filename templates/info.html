@@ -2,37 +2,109 @@
 <!-- INTRO AND FORM WITH FIELDS -->
 <div class="info-txt">
     <p>
-        This application was made for internal hospital use only. The goal of our predictive model is to help hospital emergency departments allocate resources to ensure prepardness when the time is right.
-        <br> Note: Please fill out all form fields for the most accurate predictions <br>
-        <br>
-        <b>How to Use:</b><br>
+        <h1>How to Use:</h1>
+        <h3>Saving a New Scenario:</h3>
         <ol>
             <li>
-                Please fill out each field according to the conditions you would like predictions for.
+                Please enter a name for the new scenario in the 'Enter Name for Prediction/Scenario' field above the form.
             </li>
             <li>
-                Press the 'Generate' button at the end of the form to generate a prediction for your hospitals emergency prepardness.
+                Fill out the form according to the desired scenario you would like to save.
+            </li>
+            <li>
+                To save the scenario, press the 'Save As New Scenario' button at the end of the form. To use it, you may find it in the scenario drop down above the form or you can load it from the 'Prediction History' tab.
+            </li>
+        </ol>
+        
+        <h3>Loading a Saved Scenario:</h3>
+        <span><b>Note: </b></span> loading a saved scenario will cause subsequently generated predictions to be saved under the same scenario.
+        <ol>
+            <p><b>Method 1 - Loading From the Form:</b></p>
+            <li>
+                Click on the drop down option above the form titled 'Select a Scenario'.
+            </li>
+            <li>
+                Select the scenario you would like to load into the form.
+            </li>
+        </ol>
+        <ol>
+            <p><b>Method 2 - Loading From 'Prediction Hisory' Tab:</b></p>
+            <li>
+                Select a saved scenario by clicking the desired scenario name.
+            </li>
+            <li>
+                A pop-up window will appear where you can click 'Load Scenario'.
+            </li>
+            <li>
+                This will redirect you back to the form where you can use the scenario to generate a prediction.
+            </li>
+        </ol>
+        <h3>Generating a New Prediction:</h3>
+        <ol>
+            <li>
+                Please enter a name for the new prediction in the 'Enter Name for Prediction/Scenario' field above the form.
+            </li>
+            <li>
+                Fill out each field according to the conditions you would like predictions for.
+            </li>
+            <li>
+                To generate and save the prediction, press the 'Generate Prediction' button at the end of the form to generate a prediction for your hospitals emergency prepardness.
             </li>
             <li>
                 A pop-up should appear containing the information regarding your prediction.
             </li>
             <li>
-                If you would like to save your prediction, please press the 'Save' button on the pop-up. You can find the saved prediction in the 'History' tab.
+                If you would like to find the saved prediction, please visit the 'Prediction History' tab.
+            </li>
+            <li>
+                For predictions generated with <u>no loaded scenario</u>, they will be saved under the 'Default' scenario header in the 'Prediction History' tab.
             </li>
         </ol>
-        <br> If you leave fields blank, these are the <b>default values</b> that will be used:
+        <h3>Loading a Saved Prediction:</h3>
+        <span><b>Note: </b></span> loading a saved prediction will cause subsequently generated predictions to be saved under the same scenario.
         <ol>
             <li>
-                Weather: Sunny
+                Please visit the 'Prediction History' tab to find all predictions for each scenario.
             </li>
             <li>
-                Pandemic: No
+                Select a saved prediction by clicking the desired prediction name.
             </li>
             <li>
-                Special Holiday: None
+                A pop-up window will appear where you can view the inputs of that prediction and click 'Load Inputs'.
             </li>
             <li>
-                Time of Day: Late Afternoon
+                This will redirect you back to the form where it will load the inputs of the prediction back into the form.
+            </li>
+        </ol>
+        <h3>Removing a Saved Prediction:</h3>
+        <ol>
+            <li>
+                Please visit the 'Prediction History' tab to find all predictions for each scenario
+            </li>
+            <li>
+                Click on the prediction that you would like to delete
+            </li>
+            <li>
+                A pop-up should appear with the predictions inputs and estimated wait time
+            </li>
+            <li>
+                At the bottom, click the button called 'Delete Prediction' to remove the prediction from your history
+            </li>
+        </ol>
+        <h3>Removing a Saved Scenario:</h3>
+        <span><b>Note: </b></span> removing a scenario will also remove all predictions generated below it
+        <ol>
+            <li>
+                Please visit the 'Prediction History' tab to find all scenarios
+            </li>
+            <li>
+                Click on the scenario that you would like to delete
+            </li>
+            <li>
+                A pop-up should appear with the options 'Load Scenario' and 'Delete Scenario'.
+            </li>
+            <li>
+                Click the button 'Delete Scenario' to remove the scenario from your history
             </li>
         </ol>
     </p>

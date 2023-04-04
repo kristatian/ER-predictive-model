@@ -225,8 +225,6 @@ def createScenario():
 def getScenario():
     responseScenario = requests.get(baseUrl+"/scenario/get-scenarios",cookies={'session':request.cookies.get("session")})
     responsePrediction = requests.get(baseUrl+"/history/get-history",cookies={'session':request.cookies.get("session")})
-    # print(responseScenario.content.decode("utf-8"))
-    # print(responsePrediction.content.decode("utf-8"))
     test = "[" + responseScenario.content.decode("utf-8") + "," + responsePrediction.content.decode("utf-8") + "]";
     return test
 
@@ -238,6 +236,23 @@ def getHistory():
     print(response.content.decode("utf-8"))
     return response.content.decode("utf-8")
 
+@app.route("/deletePrediction", methods=['DELETE'])
+def deletePrediction():
+    userName = request.cookies.get("userID")
+    prediction_id = request.get_data("requestID")
+    headers = {'username':userName, 'prediction_id':prediction_id}
+    response = requests.delete(baseUrl+"/history/remove-prediction",headers=headers,cookies={'session':request.cookies.get("session")})
+    print(response.content.decode("utf-8"))
+    return response.content.decode("utf-8")
+
+@app.route("/deleteScenario", methods=['DELETE'])
+def deleteScenario():
+    userName = request.cookies.get("userID")
+    scenario_id = request.get_data("scenarioID")
+    headers = {'username':userName, 'scenario_id':scenario_id}
+    response = requests.delete(baseUrl+"/scenario/remove-scenario",headers=headers,cookies={'session':request.cookies.get("session")})
+    print(response.content.decode("utf-8"))
+    return response.content.decode("utf-8")
 
 @app.route("/info.html")
 def info():

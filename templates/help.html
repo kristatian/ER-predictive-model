@@ -1,29 +1,22 @@
 {% extends "base.html" %} {% block content %}
 <!-- CONTACT FORM -->
 <div class="help-txt">
+    <h1>Who We Are:</h1>
+    <h3>
+        About The Team
+    </h3>
     <p>
-        For more information on this tool, or for technical support, please fill out the contact form below:<br>
+        We are a group of four software engineering students in our final year of university, passionate about building innovative solutions. Our latest project is a hospital wait time prediction service that aims to improve the patient experience. <br><br>
+        We recognized that wait times are not only frustrating for patients but can also have serious consequences for their health. We decided to leverage our software engineering skills to create a solution that could help hospitals better manage their patient flow and reduce wait times.
     </p>
-</div>
-<div class="help-container">
-    <form action="/action_page.php">
-        <label for="fname">First Name</label>
-        <input type="text" id="fname" name="firstname" placeholder="Your First Name">
-
-        <label for="lname">Last Name</label>
-        <input type="text" id="lname" name="lastname" placeholder="Your Last Name">
-
-        <label for="country">Country</label>
-        <select id="country" name="country">
-            <option value="australia">Australia</option>
-            <option value="canada">Canada</option>
-            <option value="usa">USA</option>
-          </select>
-
-        <label for="subject">Concern</label>
-        <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-
-        <input type="submit" value="Submit">
-    </form>
+    <h3>
+        Our Goal
+    </h3>
+    <p>
+        The goal of our predictive model is to help hospital emergency departments allocate resources to ensure prepardness when the time is right.<br><br>
+        Our team has experience in developing machine learning models and data analysis tools. We knew that building an accurate prediction service would require gathering and analyzing data from multiple sources.
+        We collected and used this data to develop machine learning models that predict wait times based on various factors. <br><br>
+        We are excited about the potential impact of our project and believe that it could make a real difference in the healthcare industry.
+    </p>
 </div>
 {% endblock %}

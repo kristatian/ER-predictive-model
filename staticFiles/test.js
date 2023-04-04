@@ -196,41 +196,23 @@ function loadPrediction() {
   }
 }
 
-/*
-function loadHistory(scenarioId) {
+function deletePrediction() {
   var xhr = new XMLHttpRequest();
-  
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == XMLHttpRequest.DONE) {
-      var historyList = document.getElementById(scenarioId);
-      var predictionList = JSON.parse(xhr.responseText);
-      //historyList.innerHTML = "";
-      for (i = 0; i < predictionList.length; i++) {
-        if (predictionList[i]['scenario_id'] == scenarioId) {
-          var div = document.createElement("div");
-          var li = document.createElement("a");
-          li.setAttribute('href', "index.html");
-          li.setAttribute('id', `${predictionList[i]['scenario_id']}`);
-          li.innerHTML = predictionList[i]['prediction_name'];
-          div.appendChild(li);
-          historyList.appendChild(div);
-        }
-        
-        li.onclick = function(e) {
-          for (i = 0; i < predictionList.length; i++) {
-            if (predictionList[i]['prediction_name'] == e.target.innerHTML) {
-              setScenario(predictionList[i]['input_vars'], e.target.id);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  xhr.open("GET", "/getHistory");
+  xhr.open("DELETE", "/deletePrediction");
   xhr.setRequestHeader("Content-Type", "application/json")
-  xhr.send();
-}*/
+  console.log(localStorage.getItem("requestID"));
+  xhr.send(requestID = localStorage.getItem("requestID"));
+  window.location.reload();
+}
+
+function deleteScenario() {
+  var xhr = new XMLHttpRequest();
+  xhr.open("DELETE", "/deleteScenario");
+  xhr.setRequestHeader("Content-Type", "application/json")
+  console.log(localStorage.getItem("scenarioID"));
+  xhr.send(scenarioID = localStorage.getItem("scenarioID"));
+  window.location.reload();
+}
 
 function loadScenarios() {
   var xhr = new XMLHttpRequest();
@@ -252,12 +234,13 @@ function loadScenarios() {
         var ul = document.createElement("ul");
         li.setAttribute('id', `${scenarioList[i]['scenario_id']}`);
         ul.setAttribute('id', `${scenarioList[i]['scenario_id']}`);
-        li.setAttribute('href', "index.html");
+        //li.setAttribute('href', "index.html");
         li.onclick = function(e) {
           for (m = 0; m < scenarioList.length; m++) {
             if (scenarioList[m]['scenario_name'] == e.target.innerHTML) {
               localStorage.setItem("scenarioID", scenarioList[m]['scenario_id']);
-              setScenario(scenarioList[m]['input_vars'], e.target.id);
+              setInputs2(scenarioList[m]['input_vars']);
+              //setScenario(scenarioList[m]['input_vars'], e.target.id);
             }
           }
         }
@@ -279,6 +262,7 @@ function loadScenarios() {
                 if (predictionList[k]['prediction_name'] == e.target.innerHTML) {
                   setInputs1(predictionList[k]['input_vars'], predictionList[k]['prediction'], predictionList[k]['date_time']);
                   localStorage.setItem("scenarioID", predictionList[k]['scenario_id']);
+                  localStorage.setItem("requestID", predictionList[k]['request_id']);
                 }
               }
             }
@@ -300,8 +284,15 @@ function setInputs1(inputs, prediction, date) {
   loadInputs1(prediction, date);
 }
 
+function setInputs2(inputs) {
+  localStorage.setItem("inputs", inputs)
+  localStorage.setItem("scenario", inputs)
+  localStorage.setItem("inputsJSON", JSON.stringify(inputs))
+  document.getElementById('id05').style.display='block';
+}
+
 function loadInputs1(prediction, date) {
-  document.getElementById('id04').style.display='block'
+  document.getElementById('id04').style.display='block';
 
   text = localStorage.getItem("inputs");
   const myArr = JSON.parse(text);
@@ -354,7 +345,7 @@ function loadInputs1(prediction, date) {
     var popDensity = myArr["Population Density /square km (Hospital Location Marker)"];
     var zone = myArr["Injury Zone"];
 
-    document.getElementById('pred-mins').innerHTML = prediction + " mins";
+    document.getElementById('pred-mins').innerHTML = prediction;
     document.getElementById('gdp-text').innerHTML = "<em>" + "GDP: " + "</em>" + gdp;
     document.getElementById('inflation-text').innerHTML = "<em>" + "Inflation: " + "</em>" + inf + " %";
     document.getElementById('pandemic-text').innerHTML = "<em>" + "Pandemic: " + "</em>" + panedmic;

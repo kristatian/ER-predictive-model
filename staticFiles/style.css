@@ -309,7 +309,7 @@ select {
 }
 
 input[type=submit] {
-    background-color: #04AA6D;
+    background-color: #2762bb;
     color: white;
     padding: 16px 20px;
     border: none;
@@ -342,6 +342,12 @@ input[type=button] {
     transition: 0.5s;
 }
 
+#load-scenario:hover {
+    background-color: rgb(0, 140, 255);
+    color: white;
+    transition: 0.5s;
+}
+
 #clearbut {
     background-color: #F3F4F4;
     color: #070D29;
@@ -353,7 +359,7 @@ input[type=button] {
 }
 
 #clearbut:hover {
-    background-color: rgb(0, 140, 255);
+    background-color: rgb(100, 100, 100);
     color: white;
     transition: 0.5s;
 }
@@ -369,11 +375,13 @@ button {
 }
 
 input[type=submit]:hover {
-    background-color: #45a049;
+    background-color: #1c4480;
+    transition: 0.5s;
 }
 
 input[type=button]:hover {
     background-color: #45a049;
+    transition: 0.5s;
 }
 
 .help-container {
@@ -531,6 +539,18 @@ input[type=button]:hover {
     margin: 1vh 0;
 }
 
+#delete-pred:hover {
+    background-color: rgb(247, 62, 49);
+    color: white;
+    transition: 0.5s;
+}
+
+#delete-scenario:hover {
+    background-color: rgb(247, 62, 49);
+    color: white;
+    transition: 0.5s;
+}
+
 .prediction-name {
     justify-content: center;
     align-items: center;
@@ -584,6 +604,10 @@ input[type=button]:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.button-container button{
+    margin: 10px;
 }
 
 /*

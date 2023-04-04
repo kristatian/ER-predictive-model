@@ -6,9 +6,9 @@ import operator
 import json
 
 config = {
-        'host': 'db',
-        'user': 'root',
-        'password': 'root',
+        'host': 'capstoneerdb.mysql.database.azure.com',
+        'user': 'elevateduser',
+        'password': '3UGFYi6eJSJsNph',
         'port': '3306',
         'database': 'erDB'
     }

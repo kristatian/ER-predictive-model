@@ -8,7 +8,7 @@ import copy
 app = Flask(__name__, template_folder='templates', static_folder='staticFiles')
 
 # change to actual address once hosting is done, this is for debugging only
-baseUrl = 'http://127.0.0.1:5000/'
+baseUrl = 'http://medipredictbackend:8000'
 
 # valid weather mapping
 validWeather = ['Foggy', 'Ice Snow', 'Rainy', 'Snowy', 'Windy']
@@ -253,4 +253,4 @@ def history():
 
 # running app
 if __name__ == "__main__":
-    app.run(debug=True,port=5002)
+    app.run(debug=True, host="0.0.0.0", port=5000)

@@ -448,6 +448,66 @@ input[type=submit]:hover {
     justify-content: center;
 }
 
+#select-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .what-if-scenarios {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+}
+
+#past-gens {
+    max-height: 70vh;
+    display: flex;
+    flex-flow: column wrap;
+    margin-left: 3vw;
+}
+
+#past-gens a {
+    font-size: 24px;
+    text-decoration: none;
+    color: black;
+}
+
+#past-gens a:hover {
+    color: rgb(0, 157, 255);
+    transition: 0.5s;
+}
+
+#past-gens li {
+    font-size: 24px;
+    text-decoration: none;
+    color: black;
+    list-style-type: none;
+    border-left: black solid 1px;
+    padding-left: 1vw;
+}
+
+#past-gens li:hover {
+    color: rgb(0, 157, 255);
+    transition: 0.5s;
+}
+
+#past-gens div {
+    margin: 1vh 0;
+}
+
+.prediction-name {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.prediction-name input {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     width: 20%;
 }

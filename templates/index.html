@@ -4,17 +4,21 @@
   <div class="home-txt">
     <br>
     <h1>Prediction Form</h1><br>
-    <select class="what-if-scenarios" id="what-if-scenarios">
-
-    </select>
+    <div id="select-container">
+      <select class="what-if-scenarios" id="what-if-scenarios">
+      </select>
+    </div>
+    
 
   </div>
   <div class="model-form">
       <div class="row">
           <form name="pred-form" action="index.html" id="prediction-form" method="POST" onsubmit="setInputs()">
+              <div class="prediction-name">
+                <label for="scenario-name">Enter Name for Prediction:</label><br />
+                <input type="field" id="sname" name="sname" value="" required/><br /><br />
+              </div>
               <div class="column">
-                  <label for="scenario-name">Enter Name for Prediction:</label><br />
-                  <input type="field" id="sname" name="sname" value="" required/><br /><br />
                   <label for="gdp">GDP of Year (in trillions USD):</label><br />
                   <input type="field" id="gdp-year" name="gdp-year" value="1.53" required/><br /><br />
                   <label for="inflation">Inflation Rate:</label><br />
@@ -217,12 +221,15 @@
   
   <script>
     document.getElementById("saveResults").addEventListener("click", function(e) {
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "/whatIfCreate");
-      xhr.setRequestHeader("Content-Type", "application/json")
-      setInputs();
-      xhr.send(JSON.stringify({inputs: localStorage.getItem("inputsJSON")}));
-      window.location.reload();
+      var form = document.getElementById("prediction-form").reportValidity();
+      if (form) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/whatIfCreate");
+        xhr.setRequestHeader("Content-Type", "application/json")
+        setInputs();
+        xhr.send(JSON.stringify({inputs: localStorage.getItem("inputsJSON")}));
+        window.location.reload();
+      }
     });
 
     function setInputs() {
@@ -281,6 +288,34 @@
     }
     
     function displayResults() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/whatIfGet");
+      xhr.setRequestHeader("Content-Type", "application/json")
+      xhr.send();
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+          var scenarioList = JSON.parse(xhr.responseText)[0];
+          var scenarioDropDown = document.getElementById('what-if-scenarios');
+
+          for (i = 0; i < scenarioList.length; i++) {
+            var option = document.createElement("option");
+            option.setAttribute('id', `${scenarioList[i]['scenario_id']}`);
+            option.setAttribute('value', `${scenarioList[i]['scenario_id']}`);
+
+            scenarioDropDown.onchange = function(e) {
+              for (m = 0; m < scenarioList.length; m++) {
+                if (scenarioList[m]['scenario_id'] == e.target.value) {
+                  setScenario(scenarioList[m]['input_vars'], e.target.value);
+                }
+              }
+            }
+            option.innerHTML = scenarioList[i]['scenario_name'];
+            scenarioDropDown.appendChild(option);
+          }
+        }
+      }
+
       if ("{{ displayResult }}" == 'True') {
         loadInputs()
         document.getElementById('id02').style.display='block';

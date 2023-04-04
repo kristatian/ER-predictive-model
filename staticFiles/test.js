@@ -243,8 +243,10 @@ function loadScenarios() {
       var predictionList = inputs['1'];
 
       var historyList = document.getElementById('past-gens')
-
+      console.log(scenarioList);
       for (i = 0; i < scenarioList.length; i++) {
+        console.log(scenarioList[i]);
+        var div = document.createElement("div");
         var li = document.createElement("a");
         var ul = document.createElement("ul");
         li.setAttribute('id', `${scenarioList[i]['scenario_id']}`);
@@ -258,8 +260,9 @@ function loadScenarios() {
           }
         }
         li.innerHTML = scenarioList[i]['scenario_name'];
-        historyList.appendChild(li);
-        historyList.appendChild(ul);
+        div.appendChild(li);
+        div.appendChild(ul);
+        historyList.appendChild(div);
 
         for (j = 0; j < predictionList.length; j++) {
           if (predictionList[j]['scenario_id'] == scenarioList[i]['scenario_id']) {
@@ -268,13 +271,13 @@ function loadScenarios() {
             a.setAttribute('id', `${predictionList[j]['scenario_id']}`);
             a.innerHTML = predictionList[j]['prediction_name'];
             ul.appendChild(a);
-          }
-          
-          a.onclick = function(e) {
-            for (k = 0; k < predictionList.length; k++) {
-              if (predictionList[k]['prediction_name'] == e.target.innerHTML) {
-                setInputs1(predictionList[k]['input_vars'], predictionList[k]['prediction'], predictionList[k]['date_time']);
-                localStorage.setItem("scenarioID", predictionList[k]['scenario_id']);
+
+            a.onclick = function(e) {
+              for (k = 0; k < predictionList.length; k++) {
+                if (predictionList[k]['prediction_name'] == e.target.innerHTML) {
+                  setInputs1(predictionList[k]['input_vars'], predictionList[k]['prediction'], predictionList[k]['date_time']);
+                  localStorage.setItem("scenarioID", predictionList[k]['scenario_id']);
+                }
               }
             }
           }

@@ -6,24 +6,32 @@ import runModel
 
 ##Prediction Generation
 def generate_prediction(username, input_vars, scenario_id, prediction_name):
-    model = 1
-    user_id = server.retrieve_user_id(username)
-    if (user_id is None):
-        return "User Id does not exist"
+    try:
+        model = 1
+        user_id = server.retrieve_user_id(username)
+        if (user_id is None):
+            return "User Id does not exist"
 
-    ##send input_vars to model
-    prediction = str(runModel.runModel(input_vars,model=model))
+        ##send input_vars to model
+        prediction = str(runModel.runModel(input_vars,model=model))
 
-    ##receive prediction from model
-    if scenario_id is None:
-        scenario_id = server.retrieve_default_scenario_id(user_id)
+        ##receive prediction from model
+        if scenario_id is None:
+            scenario_id = server.retrieve_default_scenario_id(user_id)
 
-    if prediction_name is None:
-        prediction_name = server.retrieve_scenario_name(user_id, scenario_id) + " default name"
+        if prediction_name is None:
+            prediction_name = server.retrieve_scenario_name(user_id, scenario_id) + " default name"
 
-    scenario_number = server.retrieve_current_scenario_number(user_id, scenario_id)
-    server.store_prediction(user_id, input_vars, scenario_id, prediction, scenario_number, prediction_name)
-    return prediction
+        scenario_number = server.retrieve_current_scenario_number(user_id, scenario_id)
+        server.store_prediction(user_id, input_vars, scenario_id, prediction, scenario_number, prediction_name)
+        print(prediction)
+        prediction = int(float(prediction))
+        hours = prediction // 60
+        mins = prediction - hours*60
+        time = str(hours) + " hours " + str(mins) + " mins"
+        return time
+    except:
+        return "Invalid Inputs"
 
 ##User
 def create_user(doc):

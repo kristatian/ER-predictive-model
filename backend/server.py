@@ -83,9 +83,9 @@ def delete_all_predictions(user_id):
 
 def retrieve_history(user_id): #THIS NEEDS WORK TO RETURN JSON STUFF PROPERLY
     sql = "SELECT what_if_scenario_history.version_number, what_if_scenario_history.scenario_id, prediction.request_id, prediction.input_vars, prediction.prediction, prediction.date_time, what_if_scenario_history.scenario_name, prediction.prediction_name \
-    FROM prediction, what_if_scenario_history \
+    FROM prediction, what_if_scenario_history, what_if_scenario \
     WHERE prediction.user_id = what_if_scenario_history.user_id AND prediction.user_id = '%s' AND what_if_scenario_history.version_number = prediction.scenario_version_number \
-    AND prediction.scenario_id = what_if_scenario_history.scenario_id" % (user_id)
+    AND prediction.scenario_id = what_if_scenario_history.scenario_id AND prediction.scenario_id = what_if_scenario.scenario_id AND what_if_scenario.archived = 0" % (user_id)
     cursor = db.cursor(dictionary=True)
     cursor.execute(sql) #make global
     result = cursor.fetchall()
@@ -113,7 +113,7 @@ def update_scenario(user_id, scenario_id, input_vars):
 def delete_scenario(user_id, scenario_id):
     print(user_id)
     print(scenario_id)
-    sql = "UPDATE what_if_scenario SET archived = true WHERE user_id = %s AND scenario_id = %s" ##Soft Delete
+    sql = "UPDATE what_if_scenario SET archived = true WHERE user_id = %s AND scenario_id = %s AND scenario_name != 'Default'" ##Soft Delete
     values = (user_id, scenario_id)
     cursor.execute(sql, values) #make global
     db.commit()
@@ -147,7 +147,7 @@ def retrieve_scenario_name(user_id, scenario_id):
     return result
 
 def retrieve_default_scenario_id(user_id):
-    sql = "SELECT scenario_id FROM what_if_scenario WHERE user_id = '%s' AND scenario_name = 'default'" % (user_id)
+    sql = "SELECT scenario_id FROM what_if_scenario WHERE user_id = '%s' AND scenario_name = 'Default'" % (user_id)
     cursor.execute(sql)
     result = cursor.fetchone()
     if result is not None:

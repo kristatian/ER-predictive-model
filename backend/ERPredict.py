@@ -33,7 +33,7 @@ def create_user(doc):
         return "Username is Taken"
     user_id = server.create_user(doc["username"], doc["password"])
     print(user_id)
-    server.store_scenario(user_id, json.loads('{}'), "default")
+    server.store_scenario(user_id, json.loads('{}'), "Default")
     return "Success"
 
 def verify_user(doc):

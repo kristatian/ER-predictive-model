@@ -196,6 +196,7 @@ function loadPrediction() {
   }
 }
 
+/*
 function loadHistory(scenarioId) {
   var xhr = new XMLHttpRequest();
   
@@ -229,7 +230,7 @@ function loadHistory(scenarioId) {
   xhr.open("GET", "/getHistory");
   xhr.setRequestHeader("Content-Type", "application/json")
   xhr.send();
-}
+}*/
 
 function loadScenarios() {
   var xhr = new XMLHttpRequest();
@@ -255,6 +256,7 @@ function loadScenarios() {
         li.onclick = function(e) {
           for (m = 0; m < scenarioList.length; m++) {
             if (scenarioList[m]['scenario_name'] == e.target.innerHTML) {
+              localStorage.setItem("scenarioID", scenarioList[m]['scenario_id']);
               setScenario(scenarioList[m]['input_vars'], e.target.id);
             }
           }

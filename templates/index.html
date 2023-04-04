@@ -5,6 +5,9 @@
     <br>
     <h1>Prediction Form</h1><br>
     <div id="select-container">
+      <p>
+        Select a Scenario:
+      </p>
       <select class="what-if-scenarios" id="what-if-scenarios">
       </select>
     </div>
@@ -15,22 +18,28 @@
       <div class="row">
           <form name="pred-form" action="index.html" id="prediction-form" method="POST" onsubmit="setInputs()">
               <div class="prediction-name">
-                <label for="scenario-name">Enter Name for Prediction:</label><br />
-                <input type="field" id="sname" name="sname" value="" required/><br /><br />
+                <label for="scenario-name">Enter Name for Prediction/Scenario:</label><br />
+                <input type="field" id="sname" name="sname" value="" required/><br />
               </div>
-              <div class="column">
+              <div class="column-container">
+                <div class="column">
                   <label for="gdp">GDP of Year (in trillions USD):</label><br />
-                  <input type="field" id="gdp-year" name="gdp-year" value="1.53" required/><br /><br />
+                  <input type="field" id="gdp-year" name="gdp-year" value="1.53" required/><br />
                   <label for="inflation">Inflation Rate:</label><br />
-                  <input type="field" id="inflation-rate" name="inflation-rate" value="1.43" required/><br /><br />
+                  <input type="field" id="inflation-rate" name="inflation-rate" value="1.43" required/><br />
 
                   <label for="pandemic">Pandemic:</label><br />
                   <!-- put check box y/n -->
-                  <input type="radio" id="pandemic-yes" name="pandemic-ans" value="Yes" checked/>
-                  <label for="pandemic-yes">Yes</label><br />
-                  <input type="radio" id="pandemic-no" name="pandemic-ans" value="No" />
-                  <label for="pandemic-no">No</label><br /><br />
-
+                  <div class="inline-radio">
+                    <input type="radio" id="pandemic-yes" name="pandemic-ans" value="Yes" checked/>
+                    <label for="pandemic-yes">Yes</label><br />
+                  </div>
+                  
+                  <div class="inline-radio">
+                    <input type="radio" id="pandemic-no" name="pandemic-ans" value="No" />
+                    <label for="pandemic-no">No</label><br />
+                  </div><br>
+                  
                   <label for="month">Month:</label><br />
                   <!-- dropdown option -->
                   <select id="month" name="month" required>
@@ -47,13 +56,13 @@
                       <option value="November">November</option>
                       <option value="December">December</option>
                   </select>
-                  <br /><br />
+                  <br />
 
                   <label for="age">Average Age of Province:</label><br />
-                  <input type="field" id="average-age" name="average-age" value="34" required/><br /><br />
-              </div>
+                  <input type="field" id="average-age" name="average-age" value="34" required/>
+                </div>
 
-              <div class="column">
+                <div class="column">
                   <label for="day-of-wk">Day of the Week:</label><br />
                   <!-- dropdown option -->
                   <select id="day-of-wk" name="day-of-wk" required>
@@ -65,122 +74,157 @@
                       <option value="Saturday">Saturday</option>
                       <option value="Sunday">Sunday</option>
                   </select>
-                  <br /><br />
+                  <br />                    
+      
+                    <label for="holiday">Holiday:</label><br />
+                    <!-- dropdown option -->
+                    <select id="holiday" name="holiday" required>
+                        <option value="None">None</option>
+                        <option value="Christmas Day">Christmas Day</option>
+                        <option value="New Year's Eve">New Year's Eve</option>
+                        <option value="New Year's Day">New Year's Day</option>
+                        <option value="Black Friday">Black Friday</option>
+                        <option value="Labor Day">Labor Day</option>
+                        <option value="Easter Sunday">Easter Sunday</option>
+                        <option value="Halloween">Halloween</option>
+                        <option value="Canada Day">Canada Day</option>
+                        <option value="Thanksgiving">Thanksgiving</option>
+                        <option value="Victoria Day">Victoria Day</option>
+                        <option value="Valentine's Day">Valentine's Day</option>
+                        <option value="Super bowl">Super bowl</option>
+                        <option value="St. Patrick's Day">St. Patrick's Day</option>
+                    </select>
+                    <br />
 
-                  <label for="holiday">Holiday:</label><br />
-                  <!-- dropdown option -->
-                  <select id="holiday" name="holiday" required>
-                      <option value="None">None</option>
-                      <option value="Christmas Day">Christmas Day</option>
-                      <option value="New Year's Eve">New Year's Eve</option>
-                      <option value="New Year's Day">New Year's Day</option>
-                      <option value="Black Friday">Black Friday</option>
-                      <option value="Labor Day">Labor Day</option>
-                      <option value="Easter Sunday">Easter Sunday</option>
-                      <option value="Halloween">Halloween</option>
-                      <option value="Canada Day">Canada Day</option>
-                      <option value="Thanksgiving">Thanksgiving</option>
-                      <option value="Victoria Day">Victoria Day</option>
-                      <option value="Valentine's Day">Valentine's Day</option>
-                      <option value="Super bowl">Super bowl</option>
-                      <option value="St. Patrick's Day">St. Patrick's Day</option>
-                  </select>
-                  <br /><br />
+                    <label for="time">Time of Day:</label><br />
+                    <!-- dropdown option -->
+                    <select id="time" name="time" required>
+                        <option value="Early Morning">Early Morning</option>
+                        <option value="Early Afternoon">Early Afternoon</option>
+                        <option value="Early Evening">Early Evening</option>
+                        <option value="Late Morning">Late Morning</option>
+                        <option value="Late Afternoon">Late Afternoon</option>
+                        <option value="Late Evening">Late Evening</option>
+                        <option value="Past Midnight">Past Midnight</option>
+                    </select>
+                    <br />
+                    
+                    <label for="weather">Weather:</label><br />
+                    <select id="weather" name="weather" required>
+                      <option value="Sunny">Sunny</option>
+                      <option value="Foggy">Foggy</option>
+                      <option value="Ice Snow">Ice Snow</option>
+                      <option value="Rainy">Rainy</option>
+                      <option value="Snowy">Snowy</option>
+                      <option value="Windy">Windy</option>
+                    </select>
+                    <br />
 
-                  <label for="time">Time of Day:</label><br />
-                  <!-- dropdown option -->
-                  <select id="time" name="time" required>
-                      <option value="Early Morning">Early Morning</option>
-                      <option value="Early Afternoon">Early Afternoon</option>
-                      <option value="Early Evening">Early Evening</option>
-                      <option value="Late Morning">Late Morning</option>
-                      <option value="Late Afternoon">Late Afternoon</option>
-                      <option value="Late Evening">Late Evening</option>
-                      <option value="Past Midnight">Past Midnight</option>
-                  </select>
-                  <br /><br />
-                  
-                  <label for="weather">Weather:</label><br />
-                  <select id="weather" name="weather" required>
-                    <option value="Sunny">Sunny</option>
-                    <option value="Foggy">Foggy</option>
-                    <option value="Ice Snow">Ice Snow</option>
-                    <option value="Rainy">Rainy</option>
-                    <option value="Snowy">Snowy</option>
-                    <option value="Windy">Windy</option>
-                  </select>
-                  <br /><br />
+                    <label for="facilities">Healthcare Facilities Within 50km Radius:</label><br />
+                    <input type="field" id="num-facilities" name="num-facilities" value="3" required/><br />
 
-                  <label for="facilities">Healthcare Facilities Within 50km Radius:</label><br />
-                  <input type="field" id="num-facilities" name="num-facilities" value="3" required/><br /><br />
+                </div>
 
+                <div class="column">
+                    <label for="beds-avail">Beds Available (Per 1000 People):</label>
+                    <br />
+                    <input type="field" id="beds-avail" name="beds-avail" value="2.6" required/>
+                    <br />
+                    <label for="pop-density">Population Density (Per Square Kilometer):</label>
+                    <br />
+                    <input type="field" id="pop-density" name="pop-density" value="2004.4" required/>
+                    <br />
+                    
+                    <label for="injury-type">Type of Injury:</label><br />
+                    <div class="injury-container">
+                      <div class="inline-radio">
+                        <input type="radio" id="active-seizure" name="injury-type-ans" value="Active Seizure" checked/>
+                        <label for="seizure">Active Seizure</label><br />
+                      </div>
+                      
+                      <div class="inline-radio">
+                        <input type="radio" id="heart-attack" name="injury-type-ans" value="Heart Attack"/>
+                        <label for="heart-atk">Heart Attack</label><br />
+                      </div>
+                      
+                      <div class="inline-radio">
+                        <input type="radio" id="minor-cuts" name="injury-type-ans" value="Minor Cuts"/>
+                        <label for="minor-cut">Minor Cuts</label><br />
+                      </div>
+                      
+                      <div class="inline-radio">
+                        <input type="radio" id="minor-injury" name="injury-type-ans" value="Minor Injury"/>
+                        <label for="minor-injury">Minor Injury</label><br />
+                      </div>
+                      
+                      <div class="inline-radio">
+                        <input type="radio" id="drug-overdose" name="injury-type-ans" value="Drug Overdose"/>
+                        <label for="overdose">Drug Overdose</label><br />
+                      </div>
+                      
+                      <div class="inline-radio">
+                        <input type="radio" id="cardiac-arrest" name="injury-type-ans" value="Cardiac Arrest"/>
+                        <label for="cardiac-arrest">Cardiac Arrest</label><br />
+                      </div>
+                      
+                      <div class="inline-radio">
+                        <input type="radio" id="dislocation" name="injury-type-ans" value="Dislocation"/>
+                        <label for="dislocation">Dislocation</label><br />
+                      </div>
+                      
+                      <div class="inline-radio">
+                        <input type="radio" id="flu" name="injury-type-ans" value="Flu"/>
+                        <label for="flu">Flu</label><br />
+                      </div>
+                      
+                      <div class="inline-radio">
+                        <input type="radio" id="limb-fracture" name="injury-type-ans" value="Limb Fracture"/>
+                        <label for="fracture">Limb Fracture</label><br />
+                      </div>
+                      
+                      <div class="inline-radio">
+                        <input type="radio" id="mild-breathing-difficulties" name="injury-type-ans" value="Mild Breathing difficulties"/>
+                        <label for="mild-breathing">Mild Breathing Difficulties</label><br />
+                      </div>
+                      
+                      <div class="inline-radio">
+                        <input type="radio" id="severe-pain" name="injury-type-ans" value="Severe Pain"/>
+                        <label for="severe-pain">Severe Pain</label><br />
+                      </div>
+                      
+                      <div class="inline-radio">
+                        <input type="radio" id="sprain" name="injury-type-ans" value="Sprain"/>
+                        <label for="sprain">Sprain</label><br />  
+                      </div>
+                      
+                      <div class="inline-radio">
+                        <input type="radio" id="abdominal-pain" name="injury-type-ans" value="Abdominal Pain"/>
+                        <label for="Abdominal-Pain">Abdominal Pain</label><br />
+                      </div>
+                      
+                      <div class="inline-radio">
+                        <input type="radio" id="stroke" name="injury-type-ans" value="Stroke"/>
+                        <label for="stroke">Stroke</label><br />
+                      </div>
+                    </div>
+                    
+                    <br>
+                    <label for="injury-zone">Injury Severity Zone:</label><br />
+                    <!-- dropdown option -->
+                    <select id="injury-zone" name="injury-zone" required>
+                        <option value="Green">Green</option>
+                        <option value="Yellow">Yellow</option>
+                        <option value="Red">Red</option>
+                    </select>
+                </div>
               </div>
-
-              <div class="column">
-                  <label for="beds-avail">Beds Available (Per 1000 People):</label>
-                  <br />
-                  <input type="field" id="beds-avail" name="beds-avail" value="2.6" required/>
-                  <br /><br />
-                  <label for="pop-density">Population Density (Per Square Kilometer):</label>
-                  <br />
-                  <input type="field" id="pop-density" name="pop-density" value="2004.4" required/>
-                  <br /><br />
-                  
-                  <label for="injury-type">Type of Injury:</label><br />
-                  <input type="radio" id="active-seizure" name="injury-type-ans" value="Active Seizure" checked/>
-                  <label for="seizure">Active Seizure</label><br />
-
-                  <input type="radio" id="heart-attack" name="injury-type-ans" value="Heart Attack"/>
-                  <label for="heart-atk">Heart Attack</label><br />
-
-                  <input type="radio" id="minor-cuts" name="injury-type-ans" value="Minor Cuts"/>
-                  <label for="minor-cut">Minor Cuts</label><br />
-
-                  <input type="radio" id="minor-injury" name="injury-type-ans" value="Minor Injury"/>
-                  <label for="minor-injury">Minor Injury</label><br />
-
-                  <input type="radio" id="drug-overdose" name="injury-type-ans" value="Drug Overdose"/>
-                  <label for="overdose">Drug Overdose</label><br />
-
-                  <input type="radio" id="cardiac-arrest" name="injury-type-ans" value="Cardiac Arrest"/>
-                  <label for="cardiac-arrest">Cardiac Arrest</label><br />
-
-                  <input type="radio" id="dislocation" name="injury-type-ans" value="Dislocation"/>
-                  <label for="dislocation">Dislocation</label><br />
-
-                  <input type="radio" id="flu" name="injury-type-ans" value="Flu"/>
-                  <label for="flu">Flu</label><br />
-
-                  <input type="radio" id="limb-fracture" name="injury-type-ans" value="Limb Fracture"/>
-                  <label for="fracture">Limb Fracture</label><br />
-
-                  <input type="radio" id="mild-breathing-difficulties" name="injury-type-ans" value="Mild Breathing difficulties"/>
-                  <label for="mild-breathing">Mild Breathing Difficulties</label><br />
-
-                  <input type="radio" id="severe-pain" name="injury-type-ans" value="Severe Pain"/>
-                  <label for="severe-pain">Severe Pain</label><br />
-
-                  <input type="radio" id="sprain" name="injury-type-ans" value="Sprain"/>
-                  <label for="sprain">Sprain</label><br />
-
-                  <input type="radio" id="abdominal-pain" name="injury-type-ans" value="Abdominal Pain"/>
-                  <label for="Abdominal-Pain">Abdominal Pain</label><br />
-
-                  <input type="radio" id="stroke" name="injury-type-ans" value="Stroke"/>
-                  <label for="stroke">Stroke</label><br /><br />
-
-                  <label for="injury-zone">Injury Severity Zone:</label><br />
-                  <!-- dropdown option -->
-                  <select id="injury-zone" name="injury-zone" required>
-                      <option value="Green">Green</option>
-                      <option value="Yellow">Yellow</option>
-                      <option value="Red">Red</option>
-                  </select><br /><br />
+              <br />
+              <div class="form-button-container">
+                <input type="button" id="saveResults" value="Save As New Scenario"/>
+                <input type="submit" value="Generate Prediction" onsubmit="setInputs()"/>
+                <button type="submit" id="clearbut" onclick="clearForm()">Clear Inputs</button>
               </div>
-              <input type="button" id="saveResults" value="Save As New Scenario"/>
-              <input type="submit" value="Generate Prediction" onsubmit="setInputs()"/>
-          </form> <br>
-          <button type="submit" id="clearbut" onclick="clearForm()">Clear Inputs</button>
+          </form>
           <br>
       </div>
   </div>
@@ -288,6 +332,11 @@
     }
     
     function displayResults() {
+      /*
+      scenarioID saved to local storage on select. on load, set displayed option to that
+      scenarioID not saved when clicking scenario, only prediction
+      */
+
       var xhr = new XMLHttpRequest();
       xhr.open("GET", "/whatIfGet");
       xhr.setRequestHeader("Content-Type", "application/json")
@@ -314,7 +363,14 @@
             scenarioDropDown.appendChild(option);
           }
         }
+
+        if (localStorage.getItem("scenarioID") != null) {
+          console.log(localStorage.getItem("scenarioID"))
+          document.getElementById("what-if-scenarios").value = localStorage.getItem("scenarioID");
+        }
       }
+
+      
 
       if ("{{ displayResult }}" == 'True') {
         loadInputs()

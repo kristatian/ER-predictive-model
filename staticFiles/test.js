@@ -345,7 +345,10 @@ function loadInputs1(prediction, date) {
     var popDensity = myArr["Population Density /square km (Hospital Location Marker)"];
     var zone = myArr["Injury Zone"];
 
-    document.getElementById('pred-mins').innerHTML = prediction;
+    var hours = Math.floor(parseInt(prediction) / 60);
+    var mins = Math.round(prediction % 60);
+
+    document.getElementById('pred-mins').innerHTML = hours + " hours " + mins + " mins";
     document.getElementById('gdp-text').innerHTML = "<em>" + "GDP: " + "</em>" + gdp;
     document.getElementById('inflation-text').innerHTML = "<em>" + "Inflation: " + "</em>" + inf + " %";
     document.getElementById('pandemic-text').innerHTML = "<em>" + "Pandemic: " + "</em>" + panedmic;
